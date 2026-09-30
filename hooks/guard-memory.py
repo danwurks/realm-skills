@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Whatchamacallit enforcement hook - PreToolUse on Bash.
+"""Realm Skills enforcement hook - PreToolUse on Bash.
 
 Two halves that share a file and nothing else. Keeping their reasoning separate
 is deliberate: merging them is how the memory half got a wrong threshold once.
@@ -148,7 +148,7 @@ if not hit:
 
 if hit:
     sys.stderr.write(
-        "BLOCKED by whatchamacallit (hooks/guard-memory.py): this targets Claude, "
+        "BLOCKED by Realm Skills (hooks/guard-memory.py): this targets Claude, "
         "Ghostty or Dia, which hold live work:\n  " + hit[:200] + "\n"
         "Never kill these to reclaim resources - a lost session costs more than "
         "the memory it frees, and there is no override for this rule.\n"
@@ -192,7 +192,7 @@ except Exception:
 print(json.dumps({"hookSpecificOutput": {
     "hookEventName": "PreToolUse",
     "additionalContext":
-        "WARNING from whatchamacallit (hooks/guard-memory.py): headroom says "
+        "WARNING from Realm Skills (hooks/guard-memory.py): headroom says "
         + state + ". " + detail + "\nNot blocked - this is a fact, not a refusal. "
         "Claude, Ghostty and Dia cannot be reclaimed from, so a freeze here costs "
         "live work. Consider `headroom --why` first, closing browser pages, or "

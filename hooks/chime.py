@@ -17,10 +17,10 @@ freedesktop sounds, then the terminal bell; anything else rings the bell.
 The player is spawned detached so the hook returns immediately - Claude
 Code waits for hooks, and a sound must never slow a turn down.
 
-Off switch: WHATCHAMACALLIT_CHIME=0 in the environment.
+Off switch: REALM_CHIME=0 in the environment.
 Custom sounds, per person and per machine, never in the kit: drop a file at
-~/.config/whatchamacallit/chime-done.<ext> or chime-attention.<ext> (mp3,
-m4a, aiff, wav, oga). The environment variables WHATCHAMACALLIT_CHIME_DONE /
+~/.config/realm/chime-done.<ext> or chime-attention.<ext> (mp3,
+m4a, aiff, wav, oga). The environment variables REALM_CHIME_DONE /
 _ATTENTION override even that. Long clips are cut at MAX_SECONDS on macOS;
 this plays at the end of every turn.
 """
@@ -31,7 +31,7 @@ import subprocess
 import sys
 
 EVENT = sys.argv[1] if len(sys.argv) > 1 else "done"
-USER_DIR = os.path.expanduser("~/.config/whatchamacallit")
+USER_DIR = os.path.expanduser("~/.config/realm")
 MAX_SECONDS = 4
 
 
@@ -70,9 +70,9 @@ def bell():
 
 
 def main():
-    if os.environ.get("WHATCHAMACALLIT_CHIME", "1") in ("0", "off", "false"):
+    if os.environ.get("REALM_CHIME", "1") in ("0", "off", "false"):
         return 0
-    custom = os.environ.get(f"WHATCHAMACALLIT_CHIME_{EVENT.upper()}") or user_sound(EVENT)
+    custom = os.environ.get(f"REALM_CHIME_{EVENT.upper()}") or user_sound(EVENT)
     if sys.platform == "darwin":
         path = custom or MAC_SOUNDS.get(EVENT, MAC_SOUNDS["done"])
         if os.path.exists(path) and shutil.which("afplay"):

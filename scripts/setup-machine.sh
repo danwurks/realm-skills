@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Whatchamacallit — machine setup.
+# Realm Skills - machine setup.
 #
 # Makes the kit apply to EVERY project on this machine, not just this repo.
 # Safe to re-run: it is idempotent and never overwrites without a backup.
@@ -18,7 +18,7 @@ STAMP="$(date +%Y%m%d-%H%M%S)"
 say() { printf '  %s\n' "$1"; }
 
 echo
-echo "Whatchamacallit setup"
+echo "Realm Skills setup"
 echo "  kit: $KIT"
 echo
 
@@ -182,7 +182,7 @@ else
     fi
     cat >> "$RC" <<'RESURRECT_HOOK'
 
-# whatchamacallit / resurrect - keep the Ghostty session snapshot fresh.
+# the kit / resurrect - keep the Ghostty session snapshot fresh.
 # Must be started from a Ghostty child process; see tools/resurrect/README.md.
 # The banner prints from THIS shell - the bare first pane the user is staring
 # at after a relaunch - which is the one place Ghostty lets us write.
@@ -229,7 +229,7 @@ else
     [ -f "$RC" ] && [ ! -f "$RC.backup-$STAMP" ] && cp "$RC" "$RC.backup-$STAMP"
     cat >> "$RC" <<'THEME_HOOK'
 
-# whatchamacallit - Ghostty theme switcher: theme | theme light | theme dark | theme browse
+# the kit - Ghostty theme switcher: theme | theme light | theme dark | theme browse
 [ -s "$HOME/.config/ghostty/theme.zsh" ] && source "$HOME/.config/ghostty/theme.zsh"
 THEME_HOOK
     say "theme command sourced in .zshrc"
@@ -260,7 +260,7 @@ fi
 # CLAUDE.md and docs/OS.md both claimed "a launchd job polls upstream every 6h".
 # It existed on exactly one machine and was never installed by this script, so the
 # capability did not travel (found by the 2026-08-23 audit). It does now.
-PLIST="$HOME/Library/LaunchAgents/com.whatchamacallit.unicorn-upstream.plist"
+PLIST="$HOME/Library/LaunchAgents/com.realm-skills.unicorn-upstream.plist"
 if git -C "$KIT" remote | grep -qx upstream; then
   mkdir -p "$HOME/Library/LaunchAgents" "$HOME/.cache"
   cat > "$PLIST" <<PLISTEOF
@@ -269,7 +269,7 @@ if git -C "$KIT" remote | grep -qx upstream; then
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.whatchamacallit.unicorn-upstream</string>
+    <string>com.realm-skills.unicorn-upstream</string>
     <key>ProgramArguments</key>
     <array>
         <string>$KIT/scripts/upstream-check.sh</string>

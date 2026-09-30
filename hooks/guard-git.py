@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Whatchamacallit enforcement hook - PreToolUse on Bash.
+"""Realm Skills enforcement hook - PreToolUse on Bash.
 
 Two standing git rules, moved from prose into machinery:
 
@@ -44,7 +44,7 @@ GIT_PUSH = re.compile(GIT_PREFIX + r"push\b")
 
 if GIT_ADD_ALL.search(bare):
     sys.stderr.write(
-        "BLOCKED by whatchamacallit (hooks/guard-git.py): `git add -A`, "
+        "BLOCKED by Realm Skills (hooks/guard-git.py): `git add -A`, "
         "`--all` and `git add .` are banned in every repo - a stray .env "
         "staged once is permanent. Stage by NAMED PATH instead: "
         "`git add path/to/file other/path`. No override exists.\n"
@@ -53,7 +53,7 @@ if GIT_ADD_ALL.search(bare):
 
 if GIT_PUSH.search(bare) and "KIT_APPROVED_PUSH=1" not in command:
     sys.stderr.write(
-        "HELD by whatchamacallit (hooks/guard-git.py): pushing is on the user's "
+        "HELD by Realm Skills (hooks/guard-git.py): pushing is on the user's "
         "ask-first list. If they have approved THIS push in THIS session, re-run "
         "the same command prefixed with KIT_APPROVED_PUSH=1 . If they have not, "
         "ask them - do not invent approval.\n"

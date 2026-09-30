@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Whatchamacallit enforcement hook - PreToolUse on Write/Edit.
+"""Realm Skills enforcement hook - PreToolUse on Write/Edit.
 
 The standing rule: "only AIs use double dash" - a single ASCII hyphen does
 the job. This blocks the whole typographic dash family landing in UI code
@@ -48,7 +48,7 @@ if found:
              "\u2011": "non-breaking hyphen"}
     kinds = ", ".join(sorted({names[c] for c in found}))
     sys.stderr.write(
-        f"BLOCKED by whatchamacallit (hooks/guard-em-dash.py): {len(found)} "
+        f"BLOCKED by Realm Skills (hooks/guard-em-dash.py): {len(found)} "
         f"typographic dash(es) ({kinds}) in what you are writing to {path}. "
         "The standing rule: only AIs use fancy dashes - use a single ASCII "
         "hyphen, or restructure the sentence. (Verbatim transcriptions belong "

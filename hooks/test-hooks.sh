@@ -161,7 +161,7 @@ file_case 0 "clean write"           "/x/components/b.tsx"    "export const B = 1
 chime_case() { # description, event
   local desc="$1" ev="$2" t0 t1 got
   t0=$(python3 -c 'import time;print(int(time.time()*1000))')
-  WHATCHAMACALLIT_CHIME=0 python3 "$HERE/chime.py" "$ev" >/dev/null 2>&1; got=$?
+  REALM_CHIME=0 python3 "$HERE/chime.py" "$ev" >/dev/null 2>&1; got=$?
   t1=$(python3 -c 'import time;print(int(time.time()*1000))')
   if [ "$got" = 0 ] && [ $((t1 - t0)) -lt 1000 ]; then pass=$((pass+1));
   else fail=$((fail+1)); echo "FAIL [chime] exit=$got ms=$((t1 - t0)) : $desc"; fi

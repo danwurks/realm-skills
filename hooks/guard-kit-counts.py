@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Whatchamacallit enforcement hook - PreToolUse on Bash, kit repo only.
+"""Realm Skills enforcement hook - PreToolUse on Bash, kit repo only.
 
 Blocks `git commit` INSIDE THE KIT when the counts printed in README.md,
 CLAUDE.md or project/STATE.md disagree with what is on disk. Exists because
@@ -75,7 +75,7 @@ for fname, pattern, truth, label in checks:
 
 if problems:
     sys.stderr.write(
-        "BLOCKED by whatchamacallit (hooks/guard-kit-counts.py): the kit's "
+        "BLOCKED by Realm Skills (hooks/guard-kit-counts.py): the kit's "
         "own docs miscount what is on disk - fix these before committing:\n  "
         + "\n  ".join(problems)
         + f"\nDisk truth right now: {skills} skills / {commands} commands / "

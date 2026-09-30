@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Whatchamacallit hook - PostToolUse on Write/Edit.
+"""Realm Skills hook - PostToolUse on Write/Edit.
 
 Deterministic cleanup and a truth check, after the model writes rather than
 before. Two jobs, in this order:

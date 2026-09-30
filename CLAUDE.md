@@ -279,7 +279,6 @@ Six third-party, two written here.
 
 ### Machine & tooling (3)
 - **playwright-cli** — **the first-reach browser for anything that has to be verified running.** Headless, so it leaves no window sitting in RAM; `--raw` returns the value alone; `eval` runs real JS in the page, which is what measurement needs rather than clicking; and it records video, so a transition can be frame-stepped without anyone screen-recording by hand. Imported from `@playwright/cli` (see `CREDITS.md`); the KIT NOTES block under its frontmatter carries the six things that bite on first use, including that **it is not on PATH** and that it writes `.playwright-cli/` into whatever directory it ran in. `chrome-devtools` MCP stays the second reach, for the DevTools protocol itself. **Headless is only trustworthy on a real GPU — check the unmasked renderer once per session on anything WebGL.**
-- **memory-headroom** — check headroom before starting anything expensive; `headroom` reports the verdict (OK/TIGHT/STOP) from signals that actually separate a working machine from a freezing one, since free MB and swap percent do not. Paired with `hooks/guard-memory.py`, which **blocks kills aimed at Claude, Ghostty or Dia with no override** and warns (never blocks) before heavy commands. Relative thresholds, so a roomy Mac reads OK permanently. macOS only.
 
 ### Decision & prose (2)
 - **llm-council** - five blind answers, five blind judges, Chairman synthesis; fires ONLY when I call it by name (see the routing bullet below)

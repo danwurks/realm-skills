@@ -3,7 +3,7 @@
 <p align="center">
   <em>A Claude Code setup for design engineering - brief to handoff, without the
   AI-default look.<br>
-  <strong>55 skills</strong> · <strong>13 commands</strong> · <strong>5 agents</strong></em>
+  <strong>54 skills</strong> · <strong>13 commands</strong> · <strong>5 agents</strong></em>
 </p>
 
 ---
@@ -133,13 +133,13 @@ taste             what the work should look like
 
 A skill lower in the chain never overrules one above it. `craft-floor` measures contrast ratios and line length but has no opinion on your palette. `gsap-web` knows ScrollTrigger inside out but not whether the page should move at all. When a lower skill disagrees with a higher one, the higher one wins and the lower one goes quiet — no debate, no split difference.
 
-This matters because 55 skills will happily hand you a direction if you let them, and a direction you did not choose is how work ends up looking generic.
+This matters because 54 skills will happily hand you a direction if you let them, and a direction you did not choose is how work ends up looking generic.
 
 ## What's inside
 
 ```
 .claude/
-  skills/        55 skills, bundled
+  skills/        54 skills, bundled
   commands/      14 slash commands
   agents/        5 agents — Honcho directs, 4 specialists support
 .mcp.json        Chrome DevTools + Figma
@@ -150,7 +150,7 @@ project/         The workspace — brief in, STATE.md as memory, each command's
 taste/           The taste library. Starts empty — see below
 ```
 
-## The 55 skills
+## The 54 skills
 
 | Family | Skills |
 |---|---|
@@ -162,7 +162,7 @@ taste/           The taste library. Starts empty — see below
 | **Motion & craft (8)** | `gsap-web` · `60fps-animation` · `page-transition-animation` · `svg-animation` · `micro-interaction` · `lottie-animation` · `webgl-shaders` · `typography-craft` |
 | **Visual generation (4)** | `redesign-existing-projects` · `imagegen-frontend-web` · `imagegen-frontend-mobile` · `brandkit` |
 | **Figma (7)** | `figma-use` (load this before any Figma write) + generate-design, implement-design, generate-library, code-connect, design-system-rules, create-new-file |
-| **Machine & tooling (2)** | `playwright-cli` — the first-reach browser for verifying anything that runs: headless, `eval` for real measurement, records video|
+| **Machine & tooling (1)** | `playwright-cli` — the first-reach browser for verifying anything that runs: headless, `eval` for real measurement, records video|
 | **Decision & prose (2)** | `llm-council` - blind council, blind ranking, Chairman synthesis, fired only by name · `humanizer` - the edit pass for AI tells in prose that ships |
 
 Each craft skill covers a whole discipline rather than a single task — `design-research` alone handles interviews, personas, journey maps, JTBD, usability tests, and synthesis. Fewer, denser skills keep routing obvious and context light.

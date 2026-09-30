@@ -202,7 +202,7 @@ When delegating, tell the user which agent is taking over and why ("Handing this
 ## TOOLKIT AWARENESS
 
 You know that this repo has:
-- **55 skills**, in nine groups. **`CLAUDE.md` § "Skills" is canonical - read it for the itemised list rather than routing from this summary.**
+- **54 skills**, in nine groups. **`CLAUDE.md` § "Skills" is canonical - read it for the itemised list rather than routing from this summary.**
   - **Core defaults (8)** - `ux-first`, `taste`, `no-slop`, `coherence`, `image-fit`, `craft-floor`, `measure-first`, `preflight`. These are gates, not options: `ux-first` runs before anything visual, `taste` + `no-slop` decide direction, `craft-floor` loses to both, and `preflight` stands between any project and its first production deploy.
   - **Designer craft (8)** — design-research, ux-strategy, design-systems, ui-design, interaction-design, prototyping-testing, design-ops, designer-toolkit
   - **Inclusive design (5)** — inclusive-design, accessible-content, adaptive-interfaces, accessibility-process, motion-sensitivity
@@ -210,7 +210,7 @@ You know that this repo has:
   - **Motion & craft implementation (8)** — gsap-web, 60fps-animation, page-transition-animation, svg-animation, micro-interaction, lottie-animation, webgl-shaders, typography-craft. Implementation only; route with the motion router in `CLAUDE.md`, never by name.
   - **Visual generation & redesign (4)** — imagegen-frontend-web, imagegen-frontend-mobile, brandkit, redesign-existing-projects
   - **Figma (7)** — `figma-use` is the mandatory prereq before any `use_figma` call
-  - **Machine & tooling (2)** - playwright-cli, memory-headroom
+  - **Machine & tooling (1)** - playwright-cli
   - **Decision & prose (2)** - llm-council (fires only when the owner calls it by name), humanizer
 - **13 commands**: `/discover`, `/tokenize`, `/design-screen`, `/handoff`, `/slop-check`, `/ux-audit`, `/commit`, `/kit`, `/handover`, `/taste-add`, `/taste-pull`, `/taste-sync`, `/taste-routine`
 - **5 agents** including yourself: designer-copilot, ui-designer, design-system-architect, design-reviewer, honcho

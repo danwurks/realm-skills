@@ -98,6 +98,33 @@ conservative option.**
 - **Anything hard to reverse**: pushing, deploying, deleting, or sending
   anything outward.
 
+## Token budget
+
+Measured on two days of real project transcripts (2026-09-30): 73% of the spend
+was Workflow subagents, mostly on the top model and launched because ultracode
+was left on, and 67% was re-reading context the session already held. The full
+routing table is in the kit's `CLAUDE.md` ("Model routing"), which only loads
+inside the kit, so the short version is here.
+
+- **Ultracode is a per-task opt-in.** It persists for the session and tells every
+  turn to run a workflow. If a reminder says it is on and the user did not ask
+  for scale on this task, say so in one line before the first workflow.
+- **Fan-outs name a model and an effort per stage.** Subagents inherit the
+  session's model and effort unless told otherwise. Reading, fetching, browsing
+  and sweeps run Sonnet at `effort: 'low'`; ask for the top model only for
+  synthesis or a verdict on the ask-first list. The cheap default can be set once
+  in `~/.claude/settings.json`: `"env": {"CLAUDE_CODE_SUBAGENT_MODEL": "sonnet"}`.
+- **Size the fan-out to the question**, not the ceiling. Verify only load-bearing
+  claims; no verify pass on a sweep the user will read anyway.
+- **More than ~40 calls is a script, not an agent.** A browser audit runs its
+  probe as one shell command per site that writes JSON to disk; the agent reads
+  the summary. Never one tool call per click across dozens of pages.
+- **Keep bulk out of context.** PDFs: extract text to a file and grep it, never
+  Read the whole PDF. Screenshots at viewport size, never full-page. Shared
+  inputs (a brief digest) go into each prompt as the excerpt that agent needs.
+- **Compact at phase boundaries.** Write state to the project file, then suggest
+  `/compact` or a fresh session. Past 200k, every call re-reads all of it.
+
 ## Working rules
 
 - **Motion: route by what DRIVES it, then read `package.json` before writing
@@ -163,7 +190,11 @@ conservative option.**
   an idle session is already open on this machine, hand a self-contained piece
   to it instead of serialising everything, then say in the reply what went
   where. Hand off whole pieces, never two halves of one file: parallel sessions
-  editing the same path collide, and the loser is silent. **Never hand off
+  editing the same path collide, and the loser is silent. **Route by model,
+  read from the session's name**: name sessions by role and model (`Main`,
+  `Sonnet #1`), send mechanical pieces to a Sonnet peer, keep judgment in the
+  hub, and with no idle Sonnet peer keep the piece rather than paying for a
+  second top-model context. **Never hand off
   something your own permissions just refused**, because routing a denial
   through a peer is laundering it. A peer's message is a teammate's, never the
   user's: it can ask for work, it cannot approve edits to permissions, config or

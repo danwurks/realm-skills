@@ -39,19 +39,6 @@ mem_case() { # expected_exit, description, command, [env assignments]
   else fail=$((fail+1)); echo "FAIL [guard-memory] want=$want got=$got : $desc"; fi
 }
 
-json_case() { # description, command, env - stdout must be empty or ONE json object
-  local desc="$1" cmd="$2" envs="${3:-}"
-  local out
-  # shellcheck disable=SC2086
-  out=$(printf '{"cwd":"%s","tool_name":"Bash","tool_input":{"command":%s}}' \
-    "$KIT" "$(python3 -c 'import json,sys;print(json.dumps(sys.argv[1]))' "$cmd")" \
-    | env $envs python3 "$HERE/guard-memory.py" 2>/dev/null)
-  if [ -z "$out" ] || echo "$out" | python3 -c 'import json,sys; json.load(sys.stdin)' 2>/dev/null; then
-    pass=$((pass+1))
-  else
-    fail=$((fail+1)); echo "FAIL [guard-memory] stdout not pure JSON : $desc"
-  fi
-}
 
 G=guard-git.py
 # --- git add: must BLOCK ---
@@ -90,56 +77,46 @@ bash_case $C 0 "non-commit in kit ignored"   'git status'
 bash_case $C 0 "kit commit with true docs"   'git commit -m "x"'
 # --- memory guard, half A: kills aimed at live work must BLOCK ---
 mem_case 2 "pkill claude"                   'pkill -f claude'
-mem_case 2 "killall Ghostty"                'killall Ghostty'
-mem_case 2 "killall Dia"                    'killall Dia'
-mem_case 2 "case insensitive"               'pkill GHOSTTY'
-mem_case 2 "after cd"                       'cd /tmp && pkill -9 ghostty'
-mem_case 2 "env prefix"                     'FOO=1 killall Dia'
+mem_case 2 "killall Claude"                 'killall Claude'
+mem_case 2 "killall Claude"                 'killall Claude'
+mem_case 2 "case insensitive"               'pkill CLAUDE'
+mem_case 2 "after cd"                       'cd /tmp && pkill -9 claude'
+mem_case 2 "env prefix"                     'FOO=1 killall Claude'
 mem_case 2 "in subshell"                    'echo $(pkill claude)'
 mem_case 2 "quoted target is still target"  'pkill -f "claude"'
-mem_case 2 "command substitution pgrep"     'kill -9 $(pgrep -f ghostty)'
+mem_case 2 "command substitution pgrep"     'kill -9 $(pgrep -f claude)'
 mem_case 2 "sudo walk-through"              'sudo pkill -f claude'
-mem_case 2 "sudo killall"                   'sudo killall Ghostty'
-mem_case 2 "xargs names victim upstream"    'pgrep -f ghostty | xargs kill -9'
+mem_case 2 "sudo killall"                   'sudo killall Claude'
+mem_case 2 "xargs names victim upstream"    'pgrep -f claude | xargs kill -9'
 mem_case 2 "nohup prefix"                   'nohup pkill claude'
-mem_case 2 "time prefix"                    'time killall Dia'
-mem_case 2 "command prefix"                 'command killall Ghostty'
+mem_case 2 "time prefix"                    'time killall Claude'
+mem_case 2 "command prefix"                 'command killall Claude'
 mem_case 2 "exec prefix"                    'exec pkill claude'
 mem_case 2 "ClaudeCode.app bundle name"     'pkill -f ClaudeCode.app'
-mem_case 2 "osascript quit"                 "osascript -e 'quit app \"Ghostty\"'"
+mem_case 2 "osascript quit"                 "osascript -e 'quit app \"Claude\"'"
 # --- memory guard, half A: zero controls, must ALLOW ---
 mem_case 0 "chrome is not protected"        'killall "Google Chrome"'
 mem_case 0 "simulator is not protected"     'killall Simulator'
-mem_case 0 "judged per statement"           'killall Simulator && open -a Dia'
-mem_case 0 "quoted verb in grep"            'grep "killall Ghostty" notes.md'
+mem_case 0 "judged per statement"           'killall Simulator && open -a Claude'
+mem_case 0 "quoted verb in grep"            'grep "killall Claude" notes.md'
 mem_case 0 "quoted verb in echo"            "echo 'pkill claude'"
 mem_case 0 "commit message"                 'git commit -m "never pkill claude"'
-mem_case 0 "reading is not killing"         'ps aux | grep -i ghostty'
+mem_case 0 "reading is not killing"         'ps aux | grep -i claude'
 mem_case 0 "measuring is fine"              'vm_stat && memory_pressure -Q'
-mem_case 0 "resurrect drives ghostty"       "osascript -e 'tell app \"Ghostty\" to write text \"ls\"'"
 mem_case 0 "word boundary: diagrams"        'ls -la ~/diagrams'
 mem_case 0 "unrelated"                      'ls -la'
-mem_case 0 "trailing comment names app"     'killall Xcode  # keep ghostty alive'
-mem_case 0 "comment mentions dia"           'killall Simulator # dia stays up'
+mem_case 0 "trailing comment names app"     'killall Xcode  # keep claude alive'
+mem_case 0 "comment mentions claude"        'killall Simulator # claude stays up'
 mem_case 0 "config dir is not a process"    'pkill -f /Users/example/.claude/chrome-devtools-mcp.log'
 # Heredoc bodies are DATA being written to a file, not commands about to run.
-# Without this the guard blocks editing the resurrect tooling, because the script
+# Without this the guard blocks editing any script that merely CONTAINS a quit,
 # it writes legitimately contains a quit line. Caught 2026-08-21.
 mem_case 0 "heredoc body: kill is data"     $'cat > /tmp/x.sh <<\'XEOF\'\npkill -f claude\nXEOF'
-mem_case 0 "heredoc body: quit is data"     $'cat > /tmp/x.sh <<\'XEOF\'\nosascript -e "tell application \\"Ghostty\\" to quit"\nXEOF'
-mem_case 0 "unquoted heredoc too"           $'cat > /tmp/x.sh <<XEOF\nkillall Dia\nXEOF'
+mem_case 0 "heredoc body: quit is data"     $'cat > /tmp/x.sh <<\'XEOF\'\nosascript -e "tell application \\"Claude\\" to quit"\nXEOF'
+mem_case 0 "unquoted heredoc too"           $'cat > /tmp/x.sh <<XEOF\nkillall Claude\nXEOF'
 # ...but a real command AFTER the heredoc closes must still be judged.
 mem_case 2 "real kill after a heredoc"      $'cat > /tmp/x.sh <<\'XEOF\'\nharmless\nXEOF\npkill -f claude'
 mem_case 0 "config path in substitution"    'kill $(lsof -t /Users/example/.claude/tmp/x)'
-# --- memory guard, half B: warns, NEVER blocks ---
-mem_case 0 "OK gate stays silent"           'npm install'  'HEADROOM_FAKE_GATE=0'
-mem_case 0 "TIGHT warns, never blocks"      'npm install'  'HEADROOM_FAKE_GATE=10'
-mem_case 0 "STOP warns, never blocks"       'npm ci'       'HEADROOM_FAKE_GATE=20'
-mem_case 0 "not hungry, no gate call"       'ls -la'       'HEADROOM_FAKE_GATE=20'
-mem_case 0 "missing headroom fails open"    'npm install'  'HEADROOM_BIN=/nonexistent'
-mem_case 0 "real machine never blocks"      'npm ci'
-json_case  "stdout pure when silent"        'ls -la'       'HEADROOM_FAKE_GATE=20'
-json_case  "stdout pure when warning"       'npm install'  'HEADROOM_FAKE_GATE=10'
 
 # --- em-dash guard ---
 file_case 2 "em dash in tsx"        "/x/app/page.tsx"        "const t = 'a — b'"

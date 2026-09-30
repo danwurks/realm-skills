@@ -82,7 +82,7 @@ if command -v claude >/dev/null 2>&1; then
     # These flags are load-bearing, not decoration - see docs/BROWSER-SAFETY.md.
     # --isolated       throwaway profile, so it can never touch a real one
     # --headless       no window exists, so no window can be closed
-    # --executablePath pins it to Chrome. Dia is ALSO Chromium (ArcCore statically
+    # --executablePath pins it to Chrome. A daily browser may ALSO be Chromium, so
     #                  links Chromium 151), so without this pin there is a real
     #                  path to driving the browser holding the user's live work.
     # --logFile        so a recurrence has evidence rather than recollection
@@ -142,121 +142,7 @@ echo
 echo "3c. Enforcement hooks"
 python3 "$KIT/scripts/install-hooks.py"
 
-# --- 3d. resurrect: Ghostty session survival ------------------------------------
-# Snapshots every Ghostty window/pane and the Claude Code sessions inside them, so
-# quitting Ghostty to reclaim RAM - or a hard restart after a freeze - costs
-# nothing. macOS + Ghostty only; skipped cleanly anywhere else.
-#
-# This edits the shell rc file rather than installing a LaunchAgent, and that is
-# not a preference. macOS grants Automation permission per RESPONSIBLE PROCESS: a
-# process spawned from a Ghostty shell counts as Ghostty scripting itself and needs
-# no approval, while a launchd agent is its own responsible process, cannot display
-# an Automation prompt from a background context, and its osascript hangs forever -
-# which then wedges Ghostty's Apple Event handler for every client. Verified by
-# building it that way first. See tools/resurrect/README.md.
-echo
-echo "3d. resurrect (Ghostty session survival)"
-if [ "$(uname -s)" != "Darwin" ]; then
-  say "SKIPPED: macOS only"
-elif [ ! -d "/Applications/Ghostty.app" ] && [ ! -d "$HOME/Applications/Ghostty.app" ]; then
-  say "SKIPPED: Ghostty not installed (brew install --cask ghostty), re-run then"
-else
-  mkdir -p "$HOME/.local/bin"
-  for b in resurrect resurrect-daemon moshi; do
-    ln -sfn "$KIT/tools/resurrect/bin/$b" "$HOME/.local/bin/$b"
-  done
-  say "resurrect, moshi -> $HOME/.local/bin/"
-  case ":$PATH:" in
-    *":$HOME/.local/bin:"*) ;;
-    *) say "NOTE: $HOME/.local/bin is not on PATH - add it to use 'resurrect'" ;;
-  esac
-
-  RC="$HOME/.zshrc"
-  [ "$(basename "${SHELL:-/bin/zsh}")" = "bash" ] && RC="$HOME/.bash_profile"
-  if grep -q 'resurrect-daemon' "$RC" 2>/dev/null; then
-    say "shell hook already present in $(basename "$RC")"
-  else
-    if [ -f "$RC" ]; then
-      cp "$RC" "$RC.backup-$STAMP"
-      say "backed up $(basename "$RC") -> $(basename "$RC").backup-$STAMP"
-    fi
-    cat >> "$RC" <<'RESURRECT_HOOK'
-
-# the kit / resurrect - keep the Ghostty session snapshot fresh.
-# Must be started from a Ghostty child process; see tools/resurrect/README.md.
-# The banner prints from THIS shell - the bare first pane the user is staring
-# at after a relaunch - which is the one place Ghostty lets us write.
-if [ -n "${GHOSTTY_RESOURCES_DIR:-}" ] && [ -f "$HOME/.config/ghostty-resurrect/autorestore" ]; then
-  printf '\033[1m● resurrect: bringing your sessions back - new window incoming.\033[0m\n'
-  printf '\033[2m  no need to type anything; moshi moshi is only for when this fails.\033[0m\n'
-fi
-[ -n "${GHOSTTY_RESOURCES_DIR:-}" ] && [ -x "$HOME/.local/bin/resurrect-daemon" ] \
-  && "$HOME/.local/bin/resurrect-daemon" --ensure
-RESURRECT_HOOK
-    say "shell hook added to $(basename "$RC")"
-  fi
-fi
-
-# --- 3e. Ghostty config ---------------------------------------------------------
-# Terminal looks and behaves the same on every machine: theme, font, cell metrics,
-# WASD split keybinds, and the `theme` switcher command.
-#
-# Symlinked file by file rather than as a directory, because other things write
-# into ~/.config/ghostty/ that do not belong in version control. `theme <name>`
-# edits the config THROUGH the symlink (it writes with `cat tmp > config`, not
-# `mv`, which is what keeps the link intact) - so switching theme makes the kit
-# repo dirty by one line, deliberately.
-echo
-echo "3e. Ghostty config"
-if [ "$(uname -s)" != "Darwin" ]; then
-  say "SKIPPED: macOS only"
-else
-  mkdir -p "$HOME/.config/ghostty"
-  for item in config theme.zsh themes; do
-    target="$HOME/.config/ghostty/$item"
-    if [ -e "$target" ] && [ ! -L "$target" ]; then
-      mv "$target" "$target.backup-$STAMP"
-      say "moved existing $item -> $item.backup-$STAMP"
-    fi
-    ln -sfn "$KIT/config/ghostty/$item" "$target"
-  done
-  say "config, theme.zsh, themes -> $KIT/config/ghostty/"
-
-  RC="$HOME/.zshrc"
-  if grep -q 'ghostty/theme.zsh' "$RC" 2>/dev/null; then
-    say "theme command already sourced in .zshrc"
-  else
-    [ -f "$RC" ] && [ ! -f "$RC.backup-$STAMP" ] && cp "$RC" "$RC.backup-$STAMP"
-    cat >> "$RC" <<'THEME_HOOK'
-
-# the kit - Ghostty theme switcher: theme | theme light | theme dark | theme browse
-[ -s "$HOME/.config/ghostty/theme.zsh" ] && source "$HOME/.config/ghostty/theme.zsh"
-THEME_HOOK
-    say "theme command sourced in .zshrc"
-  fi
-fi
-
-# --- 3f. headroom: memory awareness ---------------------------------------------
-# Answers "is there room to start this?" on a machine where the obvious signals
-# lie - free MB is a setpoint the kernel regulates to, and swap percent-used sits
-# near 80% on a healthy day. The thresholds are relative, so a roomy Mac reads OK
-# permanently and this costs nothing; it only speaks on a machine under real
-# pressure. Paired with hooks/guard-memory.py, which also blocks kills aimed at
-# Claude, Ghostty or Dia.
-echo
-echo "3f. headroom (memory awareness)"
-if [ "$(uname -s)" != "Darwin" ]; then
-  say "SKIPPED: macOS only"
-else
-  mkdir -p "$HOME/.local/bin"
-  ln -sfn "$KIT/tools/headroom/bin/headroom" "$HOME/.local/bin/headroom"
-  say "headroom -> $HOME/.local/bin/headroom"
-  if [ ! -f "$HOME/.claude/headroom-baseline.json" ]; then
-    say "no baseline yet - run 'headroom --baseline' on a quiet machine"
-  fi
-fi
-
-# --- 3g. upstream watcher -------------------------------------------------------
+# --- 3d. upstream watcher -------------------------------------------------------
 # CLAUDE.md and docs/OS.md both claimed "a launchd job polls upstream every 6h".
 # It existed on exactly one machine and was never installed by this script, so the
 # capability did not travel (found by the 2026-08-23 audit). It does now.
@@ -299,9 +185,6 @@ say "agents:   $(ls "$CLAUDE_DIR/agents" 2>/dev/null | wc -l | tr -d ' ')"
 command -v node >/dev/null 2>&1 && say "node:     $(node --version)" || say "node:     MISSING (chrome-devtools MCP needs it)"
 [ -d "/Applications/Google Chrome.app" ] && say "chrome:   found (MCP engine, not a browser)" || say "chrome:   MISSING (chrome-devtools MCP needs it)"
 [ -d "/Applications/Dia.app" ] && say "dia:      found (daily browser)" || say "dia:      MISSING (daily browser)"
-[ -x "$HOME/.local/bin/resurrect" ] && say "resurrect: installed" || say "resurrect: not installed (needs Ghostty)"
-[ -L "$HOME/.config/ghostty/config" ] && say "ghostty:  config linked" || say "ghostty:  config NOT linked"
-[ -x "$HOME/.local/bin/headroom" ] && say "headroom: $("$HOME/.local/bin/headroom" 2>/dev/null | head -1)" || say "headroom: not installed"
 
 # bootstrap-mac.sh prints a fuller version of this list, so it suppresses ours
 # rather than showing the user two overlapping checklists.

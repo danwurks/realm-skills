@@ -7,9 +7,9 @@ Registered by scripts/install-hooks.py on two Claude Code hook events:
     Notification  -> chime.py attention   it is waiting: a permission prompt, idle
 
 Why a hook and not the terminal bell: the bell is delivered through the
-terminal, and terminals decide what to do with it. Ghostty's default is
-bell-features = no-audio (it bounces the Dock icon and marks the tab, only
-when unfocused), so "the session made a sound" was never a sound. A hook
+terminal, and terminals decide what to do with it. Many default to no audio
+at all, bouncing a Dock icon or marking the tab instead, so "the session made
+a sound" was never reliably a sound. A hook
 runs regardless of which window is focused and regardless of terminal.
 
 Platform: macOS plays a system sound with afplay; Linux tries the

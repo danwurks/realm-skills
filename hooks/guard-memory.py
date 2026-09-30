@@ -1,21 +1,16 @@
 #!/usr/bin/env python3
 """Realm Skills enforcement hook - PreToolUse on Bash.
 
-Two halves that share a file and nothing else. Keeping their reasoning separate
-is deliberate: merging them is how the memory half got a wrong threshold once.
+Blocks any command that would kill or quit Claude itself. A session holds live
+work that cannot be recovered, so "free up memory by closing things" must never
+reach it, and there is no override.
 
-HALF A - the kill guard. BLOCKS (exit 2). Not a memory feature at all: it is a
-working-set guard. Claude, Ghostty and Dia hold live work and are never a
-legitimate source of reclaimed memory. Blocks at 90% free too. No override.
-Chrome is explicitly NOT protected - it is the MCP's disposable engine.
+It reads the command two ways, because quotes mean opposite things depending on
+what they wrap: one view with quotes blanked, to find the verb and the statement
+boundaries, and one with quotes kept, to find the target name. Comments and
+heredoc bodies are data, not commands, and are exempt.
 
-HALF B - the memory warning. NEVER BLOCKS. Before a known-expensive command,
-asks the `headroom` CLI whether there is room, and if not, tells the agent the
-number. The operator decides; the hook states a fact. No memory condition has
-ever justified refusing to run a command the user asked for.
-
-Exit 0 = allow. Exit 2 = block, stderr goes back to the agent.
-Fails OPEN on anything unexpected - a broken guard must not block real work.
+Fails OPEN on any error: a broken guard must not block real work.
 """
 import json
 import os
@@ -23,7 +18,7 @@ import re
 import subprocess
 import sys
 
-PROTECTED = r"(?:claude(?:code)?|ghostty|dia)"
+PROTECTED = r"(?:claude(?:code)?)"
 
 # Prefixes that must not smuggle a kill past the matcher. `sudo pkill -f claude`
 # is the first thing reached for after a refusal, and an env-assignment-only
@@ -31,7 +26,7 @@ PROTECTED = r"(?:claude(?:code)?|ghostty|dia)"
 PREFIX = r"(?:(?:sudo|command|exec|nohup|time|env)\s+(?:-\S+\s+)*)*(?:\w+=\S*\s+)*"
 VERBS = [PREFIX + r"(?:kill|pkill|killall)\b"]
 # xargs is judged over the WHOLE pipeline, not per statement: in
-# `pgrep -f ghostty | xargs kill -9` the target names its victim upstream of the
+# `pgrep -f claude | xargs kill -9` the target names its victim upstream of the
 # pipe, so a per-statement scan sees only a harmless-looking `xargs kill -9`.
 XARGS_KILL = re.compile(PREFIX + r"xargs\s+(?:-\S+\s+)*kill\b")
 
@@ -45,7 +40,7 @@ HUNGRY = re.compile(
 def mask_quotes(s):
     """Blank quoted spans IN PLACE, preserving length, so offsets still index
     the raw command. Statement text is sliced from the raw string afterwards, so
-    `osascript -e 'quit app "Ghostty"'` is still judged on its real content."""
+    `osascript -e 'quit app "Claude"'` is still judged on its real content."""
     return re.sub(r"""'[^']*'|"[^"]*\"|`[^`]*`""",
                   lambda m: " " * len(m.group(0)), s)
 
@@ -55,7 +50,7 @@ def mask_heredocs(s):
 
     A heredoc body is data being written to a file, not commands being run.
     Without this the guard blocks writing a SCRIPT that contains a protected
-    command - which it did on 2026-08-21, refusing to let the resurrect tooling
+    command, which once refused a legitimate edit to a script that merely
     be edited because the file it was writing contained an `osascript ... quit`
     line. The quit was text inside a file, never a thing about to execute.
 
@@ -149,52 +144,10 @@ if not hit:
 if hit:
     sys.stderr.write(
         "BLOCKED by Realm Skills (hooks/guard-memory.py): this targets Claude, "
-        "Ghostty or Dia, which hold live work:\n  " + hit[:200] + "\n"
+        "which holds live work:\n  " + hit[:200] + "\n"
         "Never kill these to reclaim resources - a lost session costs more than "
         "the memory it frees, and there is no override for this rule.\n"
         "Reclaim from Chrome, simulators, builds or idle dev servers instead. "
-        "Run `headroom --why` to see what is actually holding memory; the "
-        "cheapest relief is usually close_page in the session owning the browser.\n"
         "Known gap: `kill -9 <pid>` with a bare PID cannot be matched without "
         "running ps on every command, which is unaffordable. Check the PID first.\n")
     sys.exit(2)
-
-# ---------------------------------------------------------------- HALF B ----
-# Cheapest test first: this runs on EVERY Bash call.
-if not HUNGRY.search(masked):
-    sys.exit(0)
-
-gate = os.environ.get("HEADROOM_FAKE_GATE")
-if gate is None:
-    binary = os.environ.get("HEADROOM_BIN") or os.path.expanduser("~/.local/bin/headroom")
-    try:
-        gate = subprocess.run([binary, "--gate"], capture_output=True,
-                              timeout=2).returncode
-    except Exception:
-        sys.exit(0)                # headroom absent or slow: silence, never a block
-else:
-    try:
-        gate = int(gate)
-    except ValueError:
-        sys.exit(0)
-
-if gate == 0:
-    sys.exit(0)
-
-state = "STOP" if gate == 20 else "TIGHT"
-try:
-    detail = subprocess.run(
-        [os.environ.get("HEADROOM_BIN") or os.path.expanduser("~/.local/bin/headroom")],
-        capture_output=True, text=True, timeout=2).stdout.strip()
-except Exception:
-    detail = ""
-
-print(json.dumps({"hookSpecificOutput": {
-    "hookEventName": "PreToolUse",
-    "additionalContext":
-        "WARNING from Realm Skills (hooks/guard-memory.py): headroom says "
-        + state + ". " + detail + "\nNot blocked - this is a fact, not a refusal. "
-        "Claude, Ghostty and Dia cannot be reclaimed from, so a freeze here costs "
-        "live work. Consider `headroom --why` first, closing browser pages, or "
-        "saying plainly that you are starting anyway."}}))
-sys.exit(0)

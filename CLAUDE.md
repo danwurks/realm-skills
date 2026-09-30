@@ -284,10 +284,9 @@ Six third-party, two written here.
 - **llm-council** - five blind answers, five blind judges, Chairman synthesis; fires ONLY when the user calls it by name (see the routing bullet below)
 - **humanizer** - the systematic edit for AI tells in prose that ships under the user's name; their standing rules outrank its defaults
 
-## Commands (13)
-`/kit` (reload these rules mid-chat) · `/discover` (research cycle) · `/tokenize` (design system) · `/design-screen` (one screen end-to-end) · `/ux-audit` (does it *work* — job, states, logic, dead ends) · `/handoff` (dev handoff) · `/commit` (atomic commits) · `/handover` (draft the focused compact + kickoff for a model switch) · `/slop-check` (anti-slop review gate) · `/taste-routine` (pull+analyze+sync+push in one) · `/taste-pull` (fetch inspiration from Slack) · `/taste-add` (file inspiration from taste/inbox/) · `/taste-sync` (regenerate the taste profile)
+## Commands (11)
+`/kit` (reload these rules mid-chat) · `/discover` (research cycle) · `/tokenize` (design system) · `/design-screen` (one screen end-to-end) · `/ux-audit` (does it *work* — job, states, logic, dead ends) · `/handoff` (dev handoff) · `/commit` (atomic commits) · `/handover` (draft the focused compact + kickoff for a model switch) · `/slop-check` (anti-slop review gate) · · `/taste-add` (file inspiration from taste/inbox/) · `/taste-sync` (regenerate the taste profile)
 
-> `/taste-pull` and `/taste-routine` need a Slack workspace configured in `taste/slack.json` — **read the file, do not assume**. `/taste-add` and `/taste-sync` work offline from `taste/inbox/` and are the fallback when no channel is configured.
 
 ## Agents (5 — auto-activate)
 Talk naturally; Claude routes.

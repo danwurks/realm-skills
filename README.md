@@ -3,7 +3,7 @@
 <p align="center">
   <em>A Claude Code setup for design engineering - brief to handoff, without the
   AI-default look.<br>
-  <strong>54 skills</strong> · <strong>13 commands</strong> · <strong>5 agents</strong></em>
+  <strong>54 skills</strong> · <strong>11 commands</strong> · <strong>5 agents</strong></em>
 </p>
 
 ---
@@ -140,7 +140,7 @@ This matters because 54 skills will happily hand you a direction if you let them
 ```
 .claude/
   skills/        54 skills, bundled
-  commands/      13 commands
+  commands/      11 commands
   agents/        5 agents — Honcho directs, 4 specialists support
 .mcp.json        Chrome DevTools + Figma
 CLAUDE.md        Loaded every session: house rules, inventory, routing
@@ -171,7 +171,7 @@ Two worth calling out: **`webgl-shaders`** covers three.js/OGL/react-three-fiber
 
 The three `imagegen`/`brandkit` skills assume the agent can generate images. `.mcp.json` ships Chrome DevTools and Figma only, so they stay dormant until an image-generation server is added.
 
-## The 13 commands
+## The 11 commands
 
 | Command | What it runs |
 |---|---|
@@ -184,7 +184,6 @@ The three `imagegen`/`brandkit` skills assume the agent can generate images. `.m
 | `/handover` | Draft the focused compact + kickoff so a model switch starts small and dense |
 | `/taste-add` | File inspiration from `taste/inbox/` into the library |
 | `/taste-sync` | Regenerate `taste/TASTE.md` from the library |
-| `/taste-pull` · `/taste-routine` | Slack variants — need a workspace configured in `taste/slack.json` |
 | `/ux-audit` | Audit whether a built screen *works* — job, states, logic, dead ends — before any visual critique |
 | `/kit` | Reload the kit rules mid-conversation and re-orient a drifted chat |
 

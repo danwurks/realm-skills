@@ -56,14 +56,6 @@ anything belonging to the account you sign into Claude with.
 4. **Re-authorise the connectors** in claude.ai connector settings: Figma, Mobbin,
    Slack, Google Drive, Atlassian.
 5. Re-run `bash scripts/setup-machine.sh` if anything looks unlinked.
-6. **Check the Slack workspace.** `taste/slack.json` points at `#design-inspiration`,
-   which is a shared team channel — reachable through the account's Slack connector, so
-   confirm the new account can still see it before running `/taste-pull`.
-
-**Anything published to claude.ai under the old account — artifacts especially — stays
-with that account.** Nothing in this kit depends on one, but if you have published
-anything you care about, export it before switching.
-
 ## Working across several machines
 
 The repo is the source of truth; the machines are caches.

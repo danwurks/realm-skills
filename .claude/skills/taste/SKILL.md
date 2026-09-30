@@ -5,7 +5,7 @@ description: The user's taste memory. Use whenever choosing or proposing a visua
 
 # Taste
 
-Inspiration is saved by dropping files in `taste/inbox/` and filing them with `/taste-add`. A Slack channel can also feed it via `/taste-pull`, but only if one is configured in `taste/slack.json` — read that file rather than assuming, and fall back to the inbox route if it is unconfigured. Each save becomes an entry in `taste/library/` with the user's own words, an attribute analysis, and a "steal this" line. `/taste-sync` distills the library into `taste/TASTE.md` — the profile this skill reads. If the profile looks stale and the Slack MCP is connected, suggest `/taste-pull` first.
+Inspiration is saved by dropping files in `taste/inbox/` and filing them with `/taste-add`. Each save becomes an entry in `taste/library/` with the user's own words, an attribute analysis, and a "steal this" line. `/taste-sync` distills the library into `taste/TASTE.md` — the profile this skill reads.
 
 ## Before proposing any visual direction
 

@@ -47,7 +47,6 @@ The taste profile is what stops output looking like everyone else's. A fresh clo
 empty; this one is not - read `taste/TASTE.md` for the current state.
 
 - **Offline (works now):** drop images or links into `taste/inbox/`, run `/taste-add` to file them with a note on *why* you like it, then `/taste-sync` to regenerate `taste/TASTE.md`. Your own words are the signal: "nice" teaches nothing.
-- **Slack:** `/taste-pull` and `/taste-routine` read the channel configured in `taste/slack.json`. Read that file for the current channel rather than assuming; if it is unconfigured, use the `taste/inbox/` route instead.
 
 Re-run `/taste-sync` after adding a batch. The profile gets more useful the more
 entries it has and the more specific the *why* on each.

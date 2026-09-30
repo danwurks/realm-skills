@@ -140,7 +140,7 @@ This matters because 54 skills will happily hand you a direction if you let them
 ```
 .claude/
   skills/        54 skills, bundled
-  commands/      14 slash commands
+  commands/      13 commands
   agents/        5 agents — Honcho directs, 4 specialists support
 .mcp.json        Chrome DevTools + Figma
 CLAUDE.md        Loaded every session: house rules, inventory, routing

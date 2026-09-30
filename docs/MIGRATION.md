@@ -199,6 +199,6 @@ commit only what a stranger inheriting the codebase actually benefits from.
 ## When there is no kit at all
 
 Pasting the repo link into a chat gives an agent the **rules** but not the machinery —
-it can read `README.md` and `CLAUDE.md`, but the 56 skills are not installed and no
+it can read `README.md` and `CLAUDE.md`, but the 54 skills are not installed and no
 command will run. An agent in that position should say so plainly rather than pretending
 the skills ran, apply the rules from what it can read, and offer the one-liner above.

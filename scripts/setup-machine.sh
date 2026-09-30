@@ -184,7 +184,6 @@ say "commands: $(ls "$CLAUDE_DIR/commands" 2>/dev/null | wc -l | tr -d ' ')"
 say "agents:   $(ls "$CLAUDE_DIR/agents" 2>/dev/null | wc -l | tr -d ' ')"
 command -v node >/dev/null 2>&1 && say "node:     $(node --version)" || say "node:     MISSING (chrome-devtools MCP needs it)"
 [ -d "/Applications/Google Chrome.app" ] && say "chrome:   found (MCP engine, not a browser)" || say "chrome:   MISSING (chrome-devtools MCP needs it)"
-[ -d "/Applications/Dia.app" ] && say "dia:      found (daily browser)" || say "dia:      MISSING (daily browser)"
 
 # bootstrap-mac.sh prints a fuller version of this list, so it suppresses ours
 # rather than showing the user two overlapping checklists.

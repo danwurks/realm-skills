@@ -206,7 +206,7 @@ terminal bell is not a sound: terminals decide what a bell does, and
 fires regardless of terminal and focus. `REALM_CHIME=0` silences
 it; `REALM_CHIME_DONE` / `_ATTENTION` point at custom audio files.
 
-## Skills (56 active)
+## Skills (54 active)
 
 ### Core defaults
 - **coherence** — **one visual vocabulary per page, enforced.** Inventory what is actually in use (radius, elevation, eyebrow, type steps, section rhythm, card idiom, CTA, accents, motion, image treatment); any value appearing exactly once is a suspect. **A section only goes explosive if I say so** — propose, state the cost, ask, then build what I decide. Silence is not consent.
@@ -284,7 +284,7 @@ Six third-party, two written here.
 - **llm-council** - five blind answers, five blind judges, Chairman synthesis; fires ONLY when I call it by name (see the routing bullet below)
 - **humanizer** - the systematic edit for AI tells in prose that ships as mine; my standing rules outrank its defaults
 
-## Commands (14)
+## Commands (13)
 `/kit` (reload these rules mid-chat) · `/discover` (research cycle) · `/tokenize` (design system) · `/design-screen` (one screen end-to-end) · `/ux-audit` (does it *work* — job, states, logic, dead ends) · `/handoff` (dev handoff) · `/commit` (atomic commits) · `/handover` (draft the focused compact + kickoff for a model switch) · `/slop-check` (anti-slop review gate) · `/taste-routine` (pull+analyze+sync+push in one) · `/taste-pull` (fetch inspiration from Slack) · `/taste-add` (file inspiration from taste/inbox/) · `/taste-sync` (regenerate the taste profile)
 
 > `/taste-pull` and `/taste-routine` need a Slack workspace configured in `taste/slack.json` — **read the file, do not assume**. `/taste-add` and `/taste-sync` work offline from `taste/inbox/` and are the fallback when no channel is configured.

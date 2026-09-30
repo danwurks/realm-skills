@@ -83,7 +83,7 @@ else's:
 - **Reviewing** any design or code → `/slop-check` (or the `no-slop` checklist) is part of the review.
 - Generic AI-default output (interchangeable layouts, hype copy, boilerplate code) is treated as a defect, same severity as a broken state.
 
-`taste` is the other standing default: my taste memory in `taste/TASTE.md` + `taste/library/`.
+`taste` is the other standing default: the user's taste memory in `taste/TASTE.md` + `taste/library/`.
 Consult it before proposing any visual direction. **Read `taste/TASTE.md` and count
 `taste/library/` rather than assuming a state** — this line has been wrong before. If it
 is genuinely empty, say so rather than inventing preferences I have not expressed.
@@ -151,9 +151,9 @@ the step quietly.
 *executed* cleanly — contrast, measure, elevation, runtime defects. It has no opinion
 on what the work should look like, and it must never acquire one.
 
-Where `craft-floor` disagrees with `no-slop`, my taste library, or the project brief,
+Where `craft-floor` disagrees with `no-slop`, the taste library, or the project brief,
 **they win and it goes silent.** Do not surface it as a competing view, do not split
-the difference, do not flag the conflict. My taste is the product; the floor is
+the difference, do not flag the conflict. Their taste is the product; the floor is
 plumbing. Never cite `craft-floor` when proposing a palette, typeface, layout style,
 mood, or direction — route that to `taste` + `no-slop` instead.
 
@@ -163,7 +163,7 @@ No hard rules. Sensible defaults only, override freely:
 - **Atomic commits.** One commit is one reversible change. Bundled unrelated changes are annoying to undo later — that is the only reason, and it is reason enough.
 - **Message format.** `type(scope): what changed, in the imperative`, then a body explaining *why* when the diff does not show it. No ticket trailers — there is no tracker.
 - **Stage named paths**, not `git add -A`. This one is worth keeping: a stray `.env` or key pushed to GitHub is effectively permanent.
-- **Branch when it helps, commit to `main` when it does not.** Solo repo, my call per change.
+- **Branch when it helps, commit to `main` when it does not.** Solo repo, the user's call per change.
 - **Stack test:** "does a stranger need to find this on Google?" → Next.js (public) vs plain React/Vite (behind login) vs RN+Expo (mobile). Record the choice in `project/STATE.md`.
 - **Transfers lose nothing, and are verified by numbers.** Moving a repo between
   hosts (GitHub → GitLab, anywhere) is `clone --mirror` + `push --mirror`, then
@@ -213,9 +213,9 @@ it; `REALM_CHIME_DONE` / `_ATTENTION` point at custom audio files.
 - **image-fit** — every image must earn its place against the content beside it. Index the client's asset folder *before* choosing (their filenames are `IMG_4821.jpg` — selecting from a filename is guessing), never place an image without looking at it, justify each placement in one line, and **report gaps instead of substituting the nearest-looking photo**.
 - **ux-first** — **the gate that runs before any UI work.** Settle the job, the flow, the nine states and the ten logic tests, researched against real pattern references (GOV.UK, Baymard, NN/g, WAI-ARIA APG) for the specific thing being built, and write the spec. Then the UI implements a decided thing instead of inventing one. Runs backwards as `/ux-audit`.
 - **no-slop** — anti-AI-slop rules for visuals, copy, and code; includes the pre-ship slop check
-- **taste** — my taste memory (`taste/TASTE.md` + library); consult before any visual direction
+- **taste** — the user's taste memory (`taste/TASTE.md` + library); consult before any visual direction
 - **craft-floor** — measurable execution checks on **built** UI: contrast/measure/tracking/radius/elevation thresholds, browser-surface theming, current-generation fingerprints, runtime defects. **Subordinate to the two above** — see the precedence rule up top.
-- **measure-first** — **the second attempt is the trigger.** Before changing a value and asking me to look again, build an instrument and take the reading yourself: a scale-invariant number, zero-controlled, measured on theirs and on ours with the same tool. Read the *input* as well as the output (a constant looks exactly like a variable you haven't varied), check the artefact I actually see rather than the layer you built, calibrate against a recording of me rather than synthetic input, and read the source when the source exists. When the reference runs in a browser, probe its RUNTIME (hooked WebGL: shaders, projection matrix, per-frame matrices) instead of trusting frames; for motion, record my hand on their page, fit the law, replay the identical train into ours, and converge on the overlay. Answers *have we got there yet*, never *where should we be going* — **subordinate to `taste` and `no-slop`.**
+- **measure-first** — **the second attempt is the trigger.** Before changing a value and asking the user to look again, build an instrument and take the reading yourself: a scale-invariant number, zero-controlled, measured on theirs and on ours with the same tool. Read the *input* as well as the output (a constant looks exactly like a variable you haven't varied), check the artefact I actually see rather than the layer you built, calibrate against a recording of me rather than synthetic input, and read the source when the source exists. When the reference runs in a browser, probe its RUNTIME (hooked WebGL: shaders, projection matrix, per-frame matrices) instead of trusting frames; for motion, record a real hand on their page, fit the law, replay the identical train into ours, and converge on the overlay. Answers *have we got there yet*, never *where should we be going* — **subordinate to `taste` and `no-slop`.**
 
 - **preflight** - the launch gate, standing since 2026-09-08: twenty-one checks before ANY project goes online, each closed by evidence against the live thing (a curl, a measured ratio, a rendered page), seven routed to the skills that own them, policy items (legal, consent, analytics) asked once and never decided alone
 
@@ -237,7 +237,7 @@ it; `REALM_CHIME_DONE` / `_ATTENTION` point at custom audio files.
 - **motion-sensitivity** — vestibular safety, prefers-reduced-motion, photosensitivity
 
 ### Engineering quality (11) - snapshotted, travel with the repo
-- **dev-conventions** — my git defaults and the stack-picking test
+- **dev-conventions** — the git defaults and the stack-picking test
 - **emil-design-eng** — animation & polish taste; when *not* to animate; Before/After/Why review format
 - **frontend-design** — distinctive production UI, anti-generic by design (Anthropic official)
 - **vercel-web-design-guidelines** — terse `file:line` UI code review (a11y, forms, hydration…)
@@ -272,7 +272,7 @@ Six third-party, two written here.
 
 > **Dependency:** the three `imagegen`/`brandkit` skills assume the agent can generate images. `.mcp.json` currently ships Chrome DevTools + Figma only, so **they are dormant until an image-generation MCP server is added.** Their art-direction content is still readable as reference.
 >
-> **Precedence:** these carry their own opinions. Where any of them disagrees with `no-slop` or `taste`, **`no-slop` and `taste` win** — my taste is the authority.
+> **Precedence:** these carry their own opinions. Where any of them disagrees with `no-slop` or `taste`, **`no-slop` and `taste` win** — the user's taste is the authority.
 
 ### Figma (7)
 `figma-use` (**mandatory prereq** before any `use_figma` call), figma-generate-design-new, figma-implement-design-new, figma-generate-library-new, figma-code-connect, figma-create-design-system-rules-new, figma-create-new-file
@@ -281,8 +281,8 @@ Six third-party, two written here.
 - **playwright-cli** — **the first-reach browser for anything that has to be verified running.** Headless, so it leaves no window sitting in RAM; `--raw` returns the value alone; `eval` runs real JS in the page, which is what measurement needs rather than clicking; and it records video, so a transition can be frame-stepped without anyone screen-recording by hand. Imported from `@playwright/cli` (see `CREDITS.md`); the KIT NOTES block under its frontmatter carries the six things that bite on first use, including that **it is not on PATH** and that it writes `.playwright-cli/` into whatever directory it ran in. `chrome-devtools` MCP stays the second reach, for the DevTools protocol itself. **Headless is only trustworthy on a real GPU — check the unmasked renderer once per session on anything WebGL.**
 
 ### Decision & prose (2)
-- **llm-council** - five blind answers, five blind judges, Chairman synthesis; fires ONLY when I call it by name (see the routing bullet below)
-- **humanizer** - the systematic edit for AI tells in prose that ships as mine; my standing rules outrank its defaults
+- **llm-council** - five blind answers, five blind judges, Chairman synthesis; fires ONLY when the user calls it by name (see the routing bullet below)
+- **humanizer** - the systematic edit for AI tells in prose that ships under the user's name; their standing rules outrank its defaults
 
 ## Commands (13)
 `/kit` (reload these rules mid-chat) · `/discover` (research cycle) · `/tokenize` (design system) · `/design-screen` (one screen end-to-end) · `/ux-audit` (does it *work* — job, states, logic, dead ends) · `/handoff` (dev handoff) · `/commit` (atomic commits) · `/handover` (draft the focused compact + kickoff for a model switch) · `/slop-check` (anti-slop review gate) · `/taste-routine` (pull+analyze+sync+push in one) · `/taste-pull` (fetch inspiration from Slack) · `/taste-add` (file inspiration from taste/inbox/) · `/taste-sync` (regenerate the taste profile)
@@ -304,7 +304,7 @@ Talk naturally; Claude routes.
 - Built UI that feels off but you can't say why · "the UX is sloppy" · flow friction, dead ends, confusing states → `/ux-audit`. It answers *does it work*; `/slop-check` answers *does it look generic*. Run the UX one first — a broken flow outranks a generic gradient.
 - Choosing a visual direction / moodboard / "what do we like" → `taste` + `no-slop`
 - **Hunting UI references → run the sweep in `taste` ("The UI reference sweep"): Awwwards → Mobbin → Dribbble → Savee → Behance, and motionsites.ai for motion.** Two hard rules. (1) **Decide the register and ASK me to confirm before sweeping** — showpiece / considered / rigid-formal. These sources are built to WOW and that is wrong for a formal brief; never assume I want loud, and ask even when confident. (2) Take *surface* from them only — flow, IA, form logic and states come from `ux-first`, which runs first and outranks any reference. **Mobbin is the one exception** (real shipped flows, so fair evidence for sequence and state coverage) — it may corroborate a UX spec, never overrule one.
-- Applying taste to a project → **fit, don't spray**: read `project/brief/` (PRD/WBS) + my stated project type, apply only the clusters that serve the brief, and say which were withheld. Quiet briefs get restraint, not choreography — see the fit rule in the `taste` skill.
+- Applying taste to a project → **fit, don't spray**: read `project/brief/` (PRD/WBS) + the stated project type, apply only the clusters that serve the brief, and say which were withheld. Quiet briefs get restraint, not choreography — see the fit rule in the `taste` skill.
 - Existing design I've said I'm satisfied with → **material, not target**: learn from it, extract taste from it, change only what I explicitly request. No unsolicited redesigns.
 - **Designing any section after the first, or adding to an existing page → `coherence` first.** The page already in place is the spec; the new section conforms to it. Inventory before building, re-inventory the whole page once the last section lands — drift is only visible in aggregate. **Never break the pattern on your own initiative.** If a section wants to depart, name the axis, name the cost, and ask me. If I say yes, break exactly one axis and hold everything else, which is what makes a break read as deliberate rather than accidental.
 - **A section needs an image → `image-fit`, always.** Look at the picture before placing it, match it to that card's own heading and topic, and say in one line why it fits. If the supplied set doesn't cover a topic, **tell me what's missing** — never quietly reuse or substitute. Applies to cards, tiles, heroes, list rows, grids, thumbnails.
@@ -358,10 +358,10 @@ is installed, what the router named, and whether they match. Three outcomes:
 Approximating a named dependency by ear is not craft; it is a slower way to get it
 wrong. See the 2026-08-23 entry in `docs/RULES.md` for the build that proved it.
 
-- **`llm-council` → only when I call it by name.** My rule, 2026-09-07 ("only fire
-  when i tell you to"): "/llm-council", "convene the council" or "run this through
+- **`llm-council` → only when the user calls it by name.** It fires on explicit
+  invocation only: "/llm-council", "convene the council" or "run this through
   the council" starts it, and nothing else does - never proactively, never inferred
-  from me sounding unsure or a decision looking risky. Default mode is five Claude
+  from the user sounding unsure or a decision looking risky. Default mode is five Claude
   sub-agents with different lenses answering blind, five blind judges ranking them,
   Chairman synthesis in the main loop — no external calls, but a full run is ten opus
   spawns, so it is a deliberate act, not a reflex; three-and-three is the gut-check
@@ -421,7 +421,7 @@ wrong. See the 2026-08-23 entry in `docs/RULES.md` for the build that proved it.
   Same source and date.
 
 - **A project about to go ONLINE, or its first production deploy →
-  `preflight`.** My standing order, 2026-09-08: the launch gate runs every
+  `preflight`.** A standing order: the launch gate runs every
   time, twenty-one checks verified by evidence against the production
   target, never by project notes (the sweep that built it caught two "open"
   defects that had been closed for weeks). Seven checks route to the skills
@@ -465,7 +465,7 @@ In practice, inside a session:
 
 ## Workspace
 Project artifacts have fixed homes — commands write there, don't scatter files:
-`project/brief/` (inputs) · `project/research/` (/discover) · `project/design-system/` (/tokenize) · `project/screens/` (/design-screen) · `project/reviews/` (/slop-check) · `project/handoff/` (/handoff) · `project/STATE.md` (working memory — update at stage transitions, append decisions) · `taste/` (my taste memory)
+`project/brief/` (inputs) · `project/research/` (/discover) · `project/design-system/` (/tokenize) · `project/screens/` (/design-screen) · `project/reviews/` (/slop-check) · `project/handoff/` (/handoff) · `project/STATE.md` (working memory — update at stage transitions, append decisions) · `taste/` (the taste memory)
 
 ## Conventions
 - **WCAG AA minimum.** Kept deliberately: on paid client work in the EU and US this is a legal exposure, not a nicety. Design for keyboard, screen reader, and reduced motion from the start.
@@ -482,10 +482,10 @@ having**, pull those in, and keep every refinement here. Nothing goes back
 upstream. A launchd job polls upstream every 6h and notifies; nothing auto-merges, and the
 `upstream` push URL is set to `no_push` so a stray `git push upstream` cannot fire.
 
-`.gitattributes` marks my personal files `merge=ours` so an upstream merge takes their
-skill improvements without overwriting my setup. **Do not read that as "my files are
+`.gitattributes` marks personal files `merge=ours` so an upstream merge takes their
+skill improvements without overwriting local setup. **Do not read that as "these files are
 always safe."** `merge=ours` does not know who is merging — it fires on every merge,
-including my own branches, and when both `main` and a branch have touched a protected
+including your own branches, and when both `main` and a branch have touched a protected
 file the branch's version is discarded **silently**, with no conflict and no warning.
 Verified in a scratch repo, not assumed. Merging a long-running branch that edited
 `CLAUDE.md`, `taste/` or `project/` is therefore the one operation to be careful with.

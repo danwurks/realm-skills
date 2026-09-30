@@ -1,9 +1,9 @@
 ---
-description: Regenerate taste/TASTE.md from all library entries — my synthesized taste profile.
+description: Regenerate taste/TASTE.md from all library entries — the synthesized taste profile.
 argument-hint: ""
 ---
 # /taste-sync
-Distill `taste/library/` into my taste profile. This command owns TASTE.md; nothing else writes it.
+Distill `taste/library/` into the user's taste profile. This command owns TASTE.md; nothing else writes it.
 ## Steps
 1. **Read all entries** — Every `taste/library/*.md`: frontmatter (type, tags, score, status, date) and body.
 2. **Weight** — weight = score × recency (half-life 90 days: an entry from 90 days ago counts half).

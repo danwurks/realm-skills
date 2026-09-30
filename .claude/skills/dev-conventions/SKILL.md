@@ -1,6 +1,6 @@
 ---
 name: dev-conventions
-description: My personal git defaults for commits, branching, and stack choice. Apply when staging, committing, branching, pushing, or writing any commit message, and when choosing a framework for a new app or page. Covers atomic commits (one logical change each), the type(scope) + why message format, and the "does a stranger need to find this on Google?" stack test (Next.js vs plain React/Vite vs React Native + Expo). These are defaults, not gates — the user overrides any of them on request without argument. Pairs with no-slop for code-level review.
+description: Git defaults for commits, branching, and stack choice. Apply when staging, committing, branching, pushing, or writing any commit message, and when choosing a framework for a new app or page. Covers atomic commits (one logical change each), the type(scope) + why message format, and the "does a stranger need to find this on Google?" stack test (Next.js vs plain React/Vite vs React Native + Expo). These are defaults, not gates — the user overrides any of them on request without argument. Pairs with no-slop for code-level review.
 ---
 
 # Git conventions

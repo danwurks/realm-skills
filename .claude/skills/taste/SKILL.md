@@ -1,6 +1,6 @@
 ---
 name: taste
-description: My personal taste memory. Use whenever choosing or proposing a visual direction, hunting for inspiration or references, building a moodboard, or answering "what do we like" / "what's our style". Reads the synthesized profile in taste/TASTE.md and retrieves relevant saved inspiration from taste/library/ by tag. Pairs with no-slop — no-slop removes the generic, taste pulls toward what the user actually responds to.
+description: The user's taste memory. Use whenever choosing or proposing a visual direction, hunting for inspiration or references, building a moodboard, or answering "what do we like" / "what's our style". Reads the synthesized profile in taste/TASTE.md and retrieves relevant saved inspiration from taste/library/ by tag. Pairs with no-slop — no-slop removes the generic, taste pulls toward what the user actually responds to.
 ---
 
 # Taste

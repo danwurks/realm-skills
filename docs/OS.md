@@ -1,4 +1,4 @@
-# How I work — Whatchamacallit
+# How this kit works
 
 My operating manual. One page. Solo freelance — no team, no tracker, no approvals.
 

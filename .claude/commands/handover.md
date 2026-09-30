@@ -25,7 +25,7 @@ the operator performs it.
 
    Discard narration, dead ends, superseded drafts, resolved tangents. Target a
    few hundred words. If something was learned that the KIT should keep, note it
-   for `docs/RULES-LOG.md` or `project/STATE.md` before it is compacted away.
+   for `docs/RULES.md` or `project/STATE.md` before it is compacted away.
 3. **Draft the kickoff prompt.** One tight paragraph: the single task, its
    inputs by path, what "done" looks like, and what the next model must NOT
    re-litigate.

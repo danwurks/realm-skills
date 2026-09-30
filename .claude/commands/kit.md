@@ -1,5 +1,5 @@
 ---
-description: Reload the Whatchamacallit rules mid-conversation and re-orient to them — for a chat that started before the kit was installed, or one that has drifted.
+description: Reload the kit's rules mid-conversation and re-orient to them — for a chat that started before the kit was installed, or one that has drifted.
 argument-hint: "[optional: a specific area to re-read, e.g. 'taste' or 'ux']"
 ---
 # /kit
@@ -17,7 +17,7 @@ it up on its own. This pulls it back in.
      If a clone already exists, its address is `git remote get-url origin`.
 2. **Read** `~/.claude/CLAUDE.md` in full. If the working directory is inside the kit,
    read that repo's own `CLAUDE.md` instead — it supersedes.
-3. **Read `<KIT>/docs/RULES-LOG.md` — this is the important one.** It logs each mistake
+3. **Read `<KIT>/docs/RULES.md` — this is the important one.** It logs each mistake
    the user has actually hit and the counter-rule written to stop it. Entries are dated:
    **anything newer than the start of this conversation is a rule you have been
    breaking without knowing.** Read those entries first and say which apply to the work

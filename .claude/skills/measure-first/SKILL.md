@@ -24,7 +24,7 @@ argue for a palette, a typeface, a layout or a direction. Once the user has name
 target, this is how you reach it without spending his afternoon.
 
 Pairs with `craft-floor` (which holds the thresholds) and extends the artefact rule in
-`docs/RULES-LOG.md` — *when the thing built produces a file, the file is the evidence*.
+`docs/RULES.md` — *when the thing built produces a file, the file is the evidence*.
 
 ## When this fires
 

@@ -8,9 +8,9 @@ below binds identically for everyone it is set up for.
 
 ---
 
-# Whatchamacallit — project configuration
+# Realm Skills — project configuration
 
-**Whatchamacallit** — a design-engineering kit. Claude Code takes projects from
+**Realm Skills** — a design-engineering kit. Claude Code takes projects from
 brief → design system → UI → code → handoff. Keep it lean; keep it slop-free.
 
 The kit is one owner's asset and one team's training ground: `setup-machine.sh`
@@ -25,13 +25,13 @@ it is how the kit's owner has decided to work, and it changes whenever they want
 
 ### What this kit is FOR — the standing goal
 
-**Whatchamacallit is meant to be the ultimate library**, and it gets there two
+**This kit is meant to be the ultimate library**, and it gets there two
 ways (owner's decision, 2026-08-18, recorded in `project/STATE.md`):
 
 1. **It is continuously refined.** Every project teaches it something. A routine that
    worked, a skill that was missing, slop that got through, a mistake worth a
    counter-rule — that goes back into this repo, not into a chat that scrolls away.
-   `docs/RULES-LOG.md` is the memory of that loop.
+   `docs/RULES.md` is the memory of that loop.
 2. **It absorbs from upstream.** `hulusi-tunc/unicorn-skills` is checked from time to
    time for **new skills worth having**; the good ones get pulled in.
 
@@ -65,7 +65,7 @@ guard.
 
 | Kind of thing | Where it goes |
 |---|---|
-| A mistake and the counter-rule for it | `docs/RULES-LOG.md` |
+| A mistake and the counter-rule for it | `docs/RULES.md` |
 | A durable fact about the outside world | the code comment where it bites |
 | A capability | code, with a test |
 | What happened and when | the `project/STATE.md` log |
@@ -204,8 +204,8 @@ on `Stop` (a turn finished) and a different one on `Notification` (the
 assistant is waiting: a permission prompt, idle). It exists because the
 terminal bell is not a sound: terminals decide what a bell does, and
 Ghostty's default is no audio and a Dock bounce only when unfocused. A hook
-fires regardless of terminal and focus. `WHATCHAMACALLIT_CHIME=0` silences
-it; `WHATCHAMACALLIT_CHIME_DONE` / `_ATTENTION` point at custom audio files.
+fires regardless of terminal and focus. `REALM_CHIME=0` silences
+it; `REALM_CHIME_DONE` / `_ATTENTION` point at custom audio files.
 
 ## Skills (56 active)
 
@@ -359,7 +359,7 @@ is installed, what the router named, and whether they match. Three outcomes:
   hand-writing reads as a decision rather than an oversight.
 
 Approximating a named dependency by ear is not craft; it is a slower way to get it
-wrong. See the 2026-08-23 entry in `docs/RULES-LOG.md` for the build that proved it.
+wrong. See the 2026-08-23 entry in `docs/RULES.md` for the build that proved it.
 
 - **`llm-council` → only when I call it by name.** My rule, 2026-09-07 ("only fire
   when i tell you to"): "/llm-council", "convene the council" or "run this through

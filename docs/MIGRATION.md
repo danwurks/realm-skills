@@ -19,7 +19,7 @@ cannot live inside a repo you cannot yet read.
 
 ```bash
 # From an existing clone, `git remote get-url origin` is the address to use here.
-gh repo clone <owner>/<this-repo> ~/whatchamacallit && bash ~/whatchamacallit/scripts/setup-machine.sh
+gh repo clone <owner>/<this-repo> ~/realm-skills && bash ~/realm-skills/scripts/setup-machine.sh
 ```
 
 That symlinks the kit's skills, commands, agents and the user-level `CLAUDE.md` into

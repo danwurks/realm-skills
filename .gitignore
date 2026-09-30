@@ -1,0 +1,13 @@
+# Bytecode from the hooks, regenerated on every run and never worth committing.
+__pycache__/
+*.pyc
+
+# macOS finder droppings.
+.DS_Store
+
+# Your own layers. The kit ships the folders and their READMEs; what you put
+# inside them is yours, and on a shared repo it would only collide.
+taste/library/*
+!taste/library/.gitkeep
+project/*
+!project/README.md

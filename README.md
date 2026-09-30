@@ -1,18 +1,9 @@
-<!-- Banner: python3 assets/build-banner.py  (regenerates from assets/*.png) -->
-<p align="center">
-  <img src="assets/banner.png" width="100%"
-       alt="Pixel-art night scene: two characters sitting across a campfire under a moon and stars.">
-</p>
-
-<h1 align="center">Whatchamacallit</h1>
+<h1 align="center">Realm Skills</h1>
 
 <p align="center">
-  <em>A Claude Code setup for design engineering — brief to handoff, without the AI-default look.<br>
+  <em>A Claude Code setup for design engineering - brief to handoff, without the
+  AI-default look.<br>
   <strong>56 skills</strong> · <strong>14 commands</strong> · <strong>5 agents</strong></em>
-</p>
-
-<p align="center">
-  <sub>Two characters from different games, sharing a fire. Nobody has explained it to them either.</sub>
 </p>
 
 ---
@@ -43,7 +34,7 @@
 ```bash
 # Clone THIS repository, then run setup. From an existing clone the address is
 # `git remote get-url origin`, so the line below is true wherever it came from.
-gh repo clone <owner>/<this-repo> ~/whatchamacallit && bash ~/whatchamacallit/scripts/setup-machine.sh
+gh repo clone <owner>/<this-repo> ~/realm-skills && bash ~/realm-skills/scripts/setup-machine.sh
 ```
 
 Idempotent, backs up anything it replaces. Switching Claude accounts or machines:
@@ -85,8 +76,8 @@ brew install gh
 gh auth login
 
 # The kit, then everything else
-gh repo clone <owner>/<this-repo> ~/whatchamacallit
-bash ~/whatchamacallit/scripts/bootstrap-mac.sh
+gh repo clone <owner>/<this-repo> ~/realm-skills
+bash ~/realm-skills/scripts/setup-machine.sh
 ```
 
 You will be asked for three things along the way: your **Mac password** (Homebrew
@@ -157,7 +148,6 @@ docs/OS.md       Session routine and defaults
 project/         The workspace — brief in, STATE.md as memory, each command's
                  output in its own folder
 taste/           The taste library. Starts empty — see below
-assets/          Banner sprites and its build script
 ```
 
 ## The 56 skills

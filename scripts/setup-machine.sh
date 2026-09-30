@@ -198,8 +198,6 @@ ACCOUNT, not this machine, so they must be redone after an account switch:
   2. Re-authorise the claude.ai connectors: Figma, Mobbin, Slack, Google Drive,
      Atlassian. Connector settings on claude.ai.
 
-Then check taste/.env for the Pinterest credentials — it is gitignored, so it
-does not travel with the repo. See docs/MIGRATION.md.
 EOF
 fi
 echo

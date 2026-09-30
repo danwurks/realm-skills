@@ -89,7 +89,7 @@ conservative option.**
 
 - **Register, before hunting UI references.** Showpiece / considered /
   rigid-formal. The reference ladder runs Awwwards → Mobbin → Dribbble → Savee →
-  Behance → Pinterest, plus motionsites.ai for motion, and all of them are built
+  Behance, plus motionsites.ai for motion, and all of them are built
   to WOW, which is wrong for a formal brief. Ask even when confident. Take
   *surface* only; flow and IA come from `ux-first`. Mobbin is the one exception,
   being real shipped flows.

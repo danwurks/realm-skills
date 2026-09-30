@@ -73,13 +73,12 @@ Stop as soon as the direction is clear; this is a ladder, not a checklist.
 | 3 | **[Dribbble](https://dribbble.com/)** | Component and screen-level surface treatment | Any register — but see the warning below |
 | 4 | **[Savee](https://savee.it/)** | Art direction, typography, editorial, image-led composition | Considered and rigid — its work is quieter than Awwwards |
 | 5 | **[Behance](https://www.behance.net/)** | Full case studies, brand systems, the *reasoning* behind a direction | Rigid and formal — it carries corporate and institutional work the others don't |
-| 6 | **[Pinterest](https://www.pinterest.com/)** | Broad visual net, mood | Early exploration. The user's own curated board, if they have one, is configured in `taste/pinterest.json` |
 | — | **[motionsites.ai](https://motionsites.ai/)** | Motion reference specifically | **Only after `emil-design-eng` has agreed motion belongs at all** — this answers *how*, never *whether* |
 
 ### The warning that matters most
 
 **With one exception, these sources are evidence for how something LOOKS, never for how
-it WORKS.** Awwwards, Dribbble, Savee, Behance and Pinterest reward the portfolio, not
+it WORKS.** Awwwards, Dribbble, Savee and Behance reward the portfolio, not
 the user — shots are frequently non-functional, flows are omitted, states beyond the
 happy path do not exist, and a scroll-jacked hero that wins an award can be genuinely
 hostile to use.

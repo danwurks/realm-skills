@@ -42,7 +42,6 @@ rather than the machine (see the table below).
 | **claude.ai connectors** — Figma, Mobbin, Slack, Google Drive, Atlassian | Claude account | ❌ **re-authorise** | ❌ |
 | **Conversation history / session transcripts** | `~/.claude/projects/`, `~/.claude/sessions/` | ⚠️ local files, tied to the machine | ❌ unless copied |
 | **Auto-memory** | `~/.claude/projects/<project>/memory/` | ⚠️ same | ❌ unless copied |
-| **`taste/.env`** — Pinterest tokens | local only, **gitignored on purpose** | ✅ | ❌ **copy by hand** |
 | **`~/.claude.json`** — MCP registrations, OAuth | local, account-scoped | ⚠️ partly | ❌ |
 | **TypeWhisper settings** — workflows, dictionary, snippets, profiles, prompt actions, hotkeys, plugins | `~/Library/Application Support/TypeWhisper` + `~/Library/Preferences/com.typewhisper.mac.plist` | ✅ machine-local | ❌ **export by hand — see below** |
 | **TypeWhisper API keys** (Groq / OpenAI / xAI) | macOS **Keychain**, not the plist — verified 2026-08-23 | ✅ | ❌ re-enter |
@@ -99,9 +98,6 @@ The repo is the source of truth; the machines are caches.
 - Session history and auto-memory are **per-machine** and do not sync. Anything worth
   keeping belongs in `project/STATE.md` or a taste entry — that is precisely why the
   handoff convention exists.
-- `taste/.env` never leaves a machine (gitignored, correctly — it holds Pinterest
-  credentials). Re-create it from `taste/scripts/pinterest-auth.py` rather than copying
-  secrets around.
 
 ## Moving a repository between hosts (GitHub → GitLab, or anywhere)
 

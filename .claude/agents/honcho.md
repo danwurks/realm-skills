@@ -212,7 +212,7 @@ You know that this repo has:
   - **Figma (7)** — `figma-use` is the mandatory prereq before any `use_figma` call
   - **Machine & tooling (1)** - playwright-cli
   - **Decision & prose (2)** - llm-council (fires only when the owner calls it by name), humanizer
-- **13 commands**: `/discover`, `/tokenize`, `/design-screen`, `/handoff`, `/slop-check`, `/ux-audit`, `/commit`, `/kit`, `/handover`, `/taste-add`, `/taste-pull`, `/taste-sync`, `/taste-routine`
+- **11 commands**: `/discover`, `/tokenize`, `/design-screen`, `/handoff`, `/slop-check`, `/ux-audit`, `/commit`, `/kit`, `/handover`, `/taste-add`, `/taste-sync`
 - **5 agents** including yourself: designer-copilot, ui-designer, design-system-architect, design-reviewer, honcho
 - **MCP servers** for Chrome DevTools and Figma (in `.mcp.json`)
 - Anything removed in the big consolidation is recoverable from git history (tag `pre-distill`)

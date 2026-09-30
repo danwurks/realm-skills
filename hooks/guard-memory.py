@@ -18,7 +18,10 @@ import re
 import subprocess
 import sys
 
-PROTECTED = r"(?:claude(?:code)?)"
+PROTECTED = r"(?:claude(?:code)?|cursor)"
+# Cursor joins Claude because a team running Claude Code INSIDE Cursor has two
+# processes holding the same live work, and "free up memory" aimed at the editor
+# takes the session with it (added 2026-09-30, on the kit owner's call).
 
 # Prefixes that must not smuggle a kill past the matcher. `sudo pkill -f claude`
 # is the first thing reached for after a refusal, and an env-assignment-only
@@ -103,7 +106,7 @@ masked, named = "".join(masked), "".join(named)
 # something legitimate - `pkill -f ~/.claude/chrome-devtools-mcp.log` - is
 # blocked with a message asserting it targets Claude, which is simply untrue.
 # Both replacements are exactly 8 characters, so length is preserved.
-for lit in (".claude/", '.claude"'):
+for lit in (".claude/", '.claude"', ".cursor/", '.cursor"'):
     masked = masked.replace(lit, " " * len(lit))
     named = named.replace(lit, " " * len(lit))
 
@@ -143,7 +146,7 @@ if not hit:
 
 if hit:
     sys.stderr.write(
-        "BLOCKED by Realm Skills (hooks/guard-memory.py): this targets Claude, "
+        "BLOCKED by Realm Skills (hooks/guard-memory.py): this targets a process "
         "which holds live work:\n  " + hit[:200] + "\n"
         "Never kill these to reclaim resources - a lost session costs more than "
         "the memory it frees, and there is no override for this rule.\n"

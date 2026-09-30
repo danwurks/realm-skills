@@ -43,31 +43,6 @@ rather than the machine (see the table below).
 | **Conversation history / session transcripts** | `~/.claude/projects/`, `~/.claude/sessions/` | ⚠️ local files, tied to the machine | ❌ unless copied |
 | **Auto-memory** | `~/.claude/projects/<project>/memory/` | ⚠️ same | ❌ unless copied |
 | **`~/.claude.json`** — MCP registrations, OAuth | local, account-scoped | ⚠️ partly | ❌ |
-| **TypeWhisper settings** — workflows, dictionary, snippets, profiles, prompt actions, hotkeys, plugins | `~/Library/Application Support/TypeWhisper` + `~/Library/Preferences/com.typewhisper.mac.plist` | ✅ machine-local | ❌ **export by hand — see below** |
-| **TypeWhisper API keys** (Groq / OpenAI / xAI) | macOS **Keychain**, not the plist — verified 2026-08-23 | ✅ | ❌ re-enter |
-
-### TypeWhisper
-
-`bootstrap-mac.sh` installs the **app** (`brew install --cask typewhisper`). It does not
-install anything you configured in it.
-
-**Do not copy the files by hand.** `~/Library/Application Support/TypeWhisper` holds
-SQLite stores with live write-ahead logs (`.store` alongside `.store-wal` / `.store-shm`);
-copying the `.store` on its own loses whatever is still in the WAL, and copying a live set
-risks a torn snapshot. It is also **502 MB**, of which 482 MB is `PluginData` — the
-downloaded Parakeet and WhisperKit models, which re-download on demand and must never
-enter a git repo.
-
-**Use the app's own Backup & Restore instead** (added in 1.6). It covers exactly the
-customised surface: workflows, dictionary entries, snippets, profiles, prompt actions,
-hotkeys, **installed community plugins**, history text, and supported preferences. Export
-on the old machine, restore on the new one.
-
-⚠️ **The backup includes history text** — every transcription you have ever made. If any
-of it was dictated about client work, that file is confidential: keep it out of this repo,
-out of any shared drive, and off anything synced by default. The settings themselves are
-tiny (five stores at ~68 KB each), but there is no supported way to export them *without*
-history, so treat the whole backup as sensitive.
 
 ## Account switch checklist
 

@@ -1,6 +1,6 @@
 # How this kit works
 
-My operating manual. One page. Solo freelance — no team, no tracker, no approvals.
+The operating manual for this kit. One page.
 
 ## The folder structure
 
@@ -12,13 +12,13 @@ docs/
   resources.md      Tools and sites worth remembering, with a "use when" for each.
 project/            THE WORKSPACE — everything about the current project.
   STATE.md          Working memory between sessions. Honcho owns it.
-  brief/            PRD, references. I put things here; everything else is output.
+  brief/            PRD, references. You put things here; everything else is output.
   research/         /discover outputs — findings, personas, journey maps.
   design-system/    /tokenize outputs — tokens + docs. Source of truth for every screen.
   screens/          /design-screen outputs — one spec or code folder per screen.
   reviews/          /slop-check and critique reports, dated.
   handoff/          /handoff packages — what the client's developers receive.
-taste/              My taste memory. Read it; do not assume it is empty.
+taste/              The taste memory. Read it; do not assume it is empty.
 ```
 
 For a new client project: clone this repo, work on `main`, the `project/` folder is
@@ -31,9 +31,9 @@ that job's. Improvements to skills/agents/commands belong back here in the templ
 3. Work. Artifacts land in the `project/` folders automatically — commands know their output paths.
 4. **Before stopping:** "update STATE.md" if it hasn't already, then `/commit`. STATE.md plus git is how tomorrow's me resumes without re-explaining anything.
 
-## Per stage — Honcho drives this, I don't memorize it
+## Per stage, which Honcho drives so you do not have to memorise it
 
-| Stage | I say | What runs | Lands in |
+| Stage | You say | What runs | Lands in |
 |---|---|---|---|
 | Intake | "here's the brief" | ux-strategy + `/discover` if research needed | `brief/`, `research/` |
 | Design system | "let's build the system" | `/tokenize` (checks taste profile first) | `design-system/` |
@@ -46,7 +46,7 @@ that job's. Improvements to skills/agents/commands belong back here in the templ
 The taste profile is what stops output looking like everyone else's. A fresh clone starts
 empty; this one is not - read `taste/TASTE.md` for the current state.
 
-- **Offline (works now):** drop images or links into `taste/inbox/`, run `/taste-add` to file them with a note on *why* I like it, then `/taste-sync` to regenerate `taste/TASTE.md`. My words are the signal — "nice" teaches nothing.
+- **Offline (works now):** drop images or links into `taste/inbox/`, run `/taste-add` to file them with a note on *why* you like it, then `/taste-sync` to regenerate `taste/TASTE.md`. Your own words are the signal: "nice" teaches nothing.
 - **Slack:** `/taste-pull` and `/taste-routine` read the channel configured in `taste/slack.json`. Read that file for the current channel rather than assuming; if it is unconfigured, use the `taste/inbox/` route instead.
 
 Re-run `/taste-sync` after adding a batch. The profile gets more useful the more
@@ -54,11 +54,11 @@ entries it has and the more specific the *why* on each.
 
 ## Defaults, not rules
 
-These are how I've chosen to work. Any of them can be overridden in the moment — say
-so and Claude should just do it, without arguing.
+These are the defaults. Any of them can be overridden in the moment: say so and Claude
+should do it, without arguing.
 
 - **No slop ships.** `/slop-check` failing is a real finding, not a style note. Generic AI-default output is a defect.
-- **Client brand beats my taste; my taste beats model defaults.** The taste profile breaks ties — it never overrides a client's brand.
+- **Client brand beats the taste profile; the profile beats model defaults.** The taste profile breaks ties, and it never overrides a client's brand.
 - **Tokens over raw values.** WCAG AA, keyboard, and reduced motion from the start — on paid client work that is legal exposure in the EU and US, not a preference.
 - **STATE.md decisions are append-only.** Don't rewrite the thread.
 - **Atomic commits, named paths when staging.** See `dev-conventions`.
@@ -69,13 +69,13 @@ so and Claude should just do it, without arguing.
   `CLAUDE.md` section "Model routing": judgment and irreversible calls at the top
   tier, build-and-verify in the middle, mechanical volume at the small tier.
   Fan-outs set cheap models per stage on their own; switching the main session is
-  my move, prepared by `/handover`.
+  your move, prepared by `/handover`.
 - **Plan reality (Max 5x): tokens are the scarce resource.** Heavy multi-agent
   modes stay off by default and get switched on per task that earns them. Compact
   when a phase closes rather than when the context bursts. Before switching a
   session up-tier, `/handover` first - the expensive model reads a few hundred
   words, not the whole afternoon.
-- Hit a session limit mid-task? Work is committed as I go and STATE.md holds the thread. Fresh session, say hi to Honcho, continue.
+- Hit a session limit mid-task? Work is committed as you go and STATE.md holds the thread. Fresh session, say hi to Honcho, continue.
 
 ## Pulling upstream improvements
 
@@ -88,9 +88,9 @@ git log --oneline HEAD..upstream/main   # what changed
 git merge upstream/main                 # take it
 ```
 
-`.gitattributes` protects my personal files — `CLAUDE.md`, `README.md`, `taste/`,
+`.gitattributes` protects your own files: `CLAUDE.md`, `README.md`, `taste/`,
 `project/`, this page — so a merge takes skill improvements without
-overwriting my setup. To see what upstream changed in a protected file anyway:
+overwriting your setup. To see what upstream changed in a protected file anyway:
 `git diff HEAD upstream/main -- CLAUDE.md`.
 
 ## Improving the setup itself

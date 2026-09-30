@@ -203,7 +203,6 @@ Installed the same way but not a guard: **`chime.py`** plays a short sound
 on `Stop` (a turn finished) and a different one on `Notification` (the
 assistant is waiting: a permission prompt, idle). It exists because the
 terminal bell is not a sound: terminals decide what a bell does, and
-Ghostty's default is no audio and a Dock bounce only when unfocused. A hook
 fires regardless of terminal and focus. `REALM_CHIME=0` silences
 it; `REALM_CHIME_DONE` / `_ATTENTION` point at custom audio files.
 
@@ -280,7 +279,6 @@ Six third-party, two written here.
 
 ### Machine & tooling (3)
 - **playwright-cli** — **the first-reach browser for anything that has to be verified running.** Headless, so it leaves no window sitting in RAM; `--raw` returns the value alone; `eval` runs real JS in the page, which is what measurement needs rather than clicking; and it records video, so a transition can be frame-stepped without anyone screen-recording by hand. Imported from `@playwright/cli` (see `CREDITS.md`); the KIT NOTES block under its frontmatter carries the six things that bite on first use, including that **it is not on PATH** and that it writes `.playwright-cli/` into whatever directory it ran in. `chrome-devtools` MCP stays the second reach, for the DevTools protocol itself. **Headless is only trustworthy on a real GPU — check the unmasked renderer once per session on anything WebGL.**
-- **session-resurrect** — save and restore Ghostty windows, panes and the Claude Code sessions inside them; the user restarts often on a small machine, and this makes quitting Ghostty free. Runs the `resurrect` CLI installed by `setup-machine.sh`. **Never rebuild its auto-save as a LaunchAgent** — macOS grants Automation permission per responsible process, so a launchd agent's `osascript` hangs forever and wedges Ghostty for every client; the daemon must stay a child of a Ghostty shell. macOS only.
 - **memory-headroom** — check headroom before starting anything expensive; `headroom` reports the verdict (OK/TIGHT/STOP) from signals that actually separate a working machine from a freezing one, since free MB and swap percent do not. Paired with `hooks/guard-memory.py`, which **blocks kills aimed at Claude, Ghostty or Dia with no override** and warns (never blocks) before heavy commands. Relative thresholds, so a roomy Mac reads OK permanently. macOS only.
 
 ### Decision & prose (2)
@@ -288,7 +286,7 @@ Six third-party, two written here.
 - **humanizer** - the systematic edit for AI tells in prose that ships as mine; my standing rules outrank its defaults
 
 ## Commands (14)
-`/kit` (reload these rules mid-chat) · `/discover` (research cycle) · `/tokenize` (design system) · `/design-screen` (one screen end-to-end) · `/ux-audit` (does it *work* — job, states, logic, dead ends) · `/handoff` (dev handoff) · `/commit` (atomic commits) · `/handover` (draft the focused compact + kickoff for a model switch) · `/oyasumi` (goodnight: save all sessions, close Ghostty, stop the Claude daemon; wake with `moshi moshi`) · `/slop-check` (anti-slop review gate) · `/taste-routine` (pull+analyze+sync+push in one) · `/taste-pull` (fetch inspiration from Slack) · `/taste-add` (file inspiration from taste/inbox/) · `/taste-sync` (regenerate the taste profile)
+`/kit` (reload these rules mid-chat) · `/discover` (research cycle) · `/tokenize` (design system) · `/design-screen` (one screen end-to-end) · `/ux-audit` (does it *work* — job, states, logic, dead ends) · `/handoff` (dev handoff) · `/commit` (atomic commits) · `/handover` (draft the focused compact + kickoff for a model switch) · `/slop-check` (anti-slop review gate) · `/taste-routine` (pull+analyze+sync+push in one) · `/taste-pull` (fetch inspiration from Slack) · `/taste-add` (file inspiration from taste/inbox/) · `/taste-sync` (regenerate the taste profile)
 
 > `/taste-pull` and `/taste-routine` need a Slack workspace configured in `taste/slack.json` — **read the file, do not assume**. `/taste-add` and `/taste-sync` work offline from `taste/inbox/` and are the fallback when no channel is configured.
 

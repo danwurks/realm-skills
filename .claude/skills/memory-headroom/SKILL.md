@@ -22,7 +22,7 @@ are relative, so a roomy Mac reads OK permanently and the check costs ~10 ms.
 
 ## What is protected, and what is fair game
 
-**Claude Code, Ghostty and Dia are fixed cost.** They hold live work.
+**Claude Code, your terminal and your browser are fixed cost.** They hold live work.
 `hooks/guard-memory.py` blocks kills against them and there is **no override** -
 do not try to route around it with `sudo`, a pipeline into `xargs`, or
 `osascript`. All of those are covered.

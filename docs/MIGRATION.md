@@ -5,10 +5,10 @@ git repo.** What follows is the list of the exceptions, so none of them surprise
 
 ## One command on a new machine
 
-**A Mac with nothing on it** — no Homebrew, no Ghostty, no Claude Code. Open the
+**A Mac with nothing on it** — no Homebrew, no Claude Code. Open the
 repo on github.com in a browser you are signed in to, copy the block under
 **"First step - For those who come after"** in `README.md`, and paste it into
-Terminal. It installs Homebrew, Ghostty, Chrome, node, the GitHub CLI and Claude
+Terminal. It installs Homebrew, Chrome, node, the GitHub CLI and Claude
 Code, signs you in to GitHub, clones this kit, and runs everything below.
 
 The block cannot be a bare `curl | bash` from this repo, because the repo is

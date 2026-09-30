@@ -146,24 +146,3 @@ Skills carrying their own upstream provenance, inherited from the template:
 `vercel-react-best-practices`, `vercel-react-native-skills` (Vercel),
 `emil-design-eng` (Emil Kowalski's published writing), `shadcn-ui` (shadcn/ui).
 
-## Vendored: ghostty-resurrect
-
-Source: https://github.com/redareda9/ghostty-resurrect — MIT licensed.
-Commit `a568557` (2026-06-19, the repo's only commit).
-
-Lives in `tools/resurrect/vendor/`, with `LICENSE` retained unmodified. Vendored
-rather than installed from npm because it carries a local patch that is not
-optional on a memory-constrained machine, and `npm install -g` would silently
-replace it.
-
-Modified in two places, both documented with measurements in
-`tools/resurrect/vendor/PATCHES.md`, with the exact diff kept alongside as
-`local-patch.diff`:
-
-| Patch | Why |
-|---|---|
-| `lastAiTitle()` tail-reads transcripts | Upstream read each whole transcript into memory: 293 MB peak RSS on a 61 MB file, vs 51 MB patched |
-| `allCodexSessions()` head-reads rollouts | Same bug, smaller: whole file read to keep its first 4 KB. Unverified — no `~/.codex` on the machine it was written on |
-| Window geometry captured and restored | Upstream never saved position or size. Ghostty's dictionary exposes no geometry, so it comes from System Events, guarded against restoring onto a display that has since been unplugged |
-
-The wrapper scripts in `tools/resurrect/bin/` are original work, not upstream.

@@ -3,7 +3,7 @@
 <p align="center">
   <em>A Claude Code setup for design engineering - brief to handoff, without the
   AI-default look.<br>
-  <strong>56 skills</strong> · <strong>14 commands</strong> · <strong>5 agents</strong></em>
+  <strong>55 skills</strong> · <strong>13 commands</strong> · <strong>5 agents</strong></em>
 </p>
 
 ---
@@ -63,7 +63,7 @@ You do not need to memorise any of it. Describe the task and Claude routes to th
 ## First step - For those who come after
 
 A brand new Mac with nothing on it. Open **Terminal**, paste this, and go and make
-a coffee. It installs Homebrew, Ghostty, Chrome, node, the GitHub CLI and Claude
+a coffee. It installs Homebrew, Chrome, node, the GitHub CLI and Claude
 Code, clones this kit, and applies every setting it carries.
 
 ```bash
@@ -133,13 +133,13 @@ taste             what the work should look like
 
 A skill lower in the chain never overrules one above it. `craft-floor` measures contrast ratios and line length but has no opinion on your palette. `gsap-web` knows ScrollTrigger inside out but not whether the page should move at all. When a lower skill disagrees with a higher one, the higher one wins and the lower one goes quiet — no debate, no split difference.
 
-This matters because 56 skills will happily hand you a direction if you let them, and a direction you did not choose is how work ends up looking generic.
+This matters because 55 skills will happily hand you a direction if you let them, and a direction you did not choose is how work ends up looking generic.
 
 ## What's inside
 
 ```
 .claude/
-  skills/        56 skills, bundled
+  skills/        55 skills, bundled
   commands/      14 slash commands
   agents/        5 agents — Honcho directs, 4 specialists support
 .mcp.json        Chrome DevTools + Figma
@@ -150,7 +150,7 @@ project/         The workspace — brief in, STATE.md as memory, each command's
 taste/           The taste library. Starts empty — see below
 ```
 
-## The 56 skills
+## The 55 skills
 
 | Family | Skills |
 |---|---|
@@ -162,7 +162,7 @@ taste/           The taste library. Starts empty — see below
 | **Motion & craft (8)** | `gsap-web` · `60fps-animation` · `page-transition-animation` · `svg-animation` · `micro-interaction` · `lottie-animation` · `webgl-shaders` · `typography-craft` |
 | **Visual generation (4)** | `redesign-existing-projects` · `imagegen-frontend-web` · `imagegen-frontend-mobile` · `brandkit` |
 | **Figma (7)** | `figma-use` (load this before any Figma write) + generate-design, implement-design, generate-library, code-connect, design-system-rules, create-new-file |
-| **Machine & tooling (3)** | `playwright-cli` — the first-reach browser for verifying anything that runs: headless, `eval` for real measurement, records video · `session-resurrect` — save and restore Ghostty windows, panes and the Claude sessions inside them · `memory-headroom` — check there is room before starting anything expensive |
+| **Machine & tooling (2)** | `playwright-cli` — the first-reach browser for verifying anything that runs: headless, `eval` for real measurement, records video|
 | **Decision & prose (2)** | `llm-council` - blind council, blind ranking, Chairman synthesis, fired only by name · `humanizer` - the edit pass for AI tells in prose that ships |
 
 Each craft skill covers a whole discipline rather than a single task — `design-research` alone handles interviews, personas, journey maps, JTBD, usability tests, and synthesis. Fewer, denser skills keep routing obvious and context light.
@@ -171,7 +171,7 @@ Two worth calling out: **`webgl-shaders`** covers three.js/OGL/react-three-fiber
 
 The three `imagegen`/`brandkit` skills assume the agent can generate images. `.mcp.json` ships Chrome DevTools and Figma only, so they stay dormant until an image-generation server is added.
 
-## The 14 commands
+## The 13 commands
 
 | Command | What it runs |
 |---|---|
@@ -182,7 +182,6 @@ The three `imagegen`/`brandkit` skills assume the agent can generate images. `.m
 | `/slop-check` | The review gate — `no-slop` first, then `craft-floor`, then a live browser pass |
 | `/commit` | Atomic commits: `type(scope)` + why, staged by named path |
 | `/handover` | Draft the focused compact + kickoff so a model switch starts small and dense |
-| `/oyasumi` | Goodnight: save every session, close Ghostty, stop the Claude daemon. Wake it with `moshi moshi` |
 | `/taste-add` | File inspiration from `taste/inbox/` into the library |
 | `/taste-sync` | Regenerate `taste/TASTE.md` from the library |
 | `/taste-pull` · `/taste-routine` | Slack variants — need a workspace configured in `taste/slack.json` |
